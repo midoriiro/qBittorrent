@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Content layout:</source>
-        <translation>Layout för innehåll:</translation>
+        <translation>Innehållslayout:</translation>
     </message>
     <message>
         <source>Original</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Kunde inte spara programinställningarna. qBittorrent är antagligen inte nåbar.</translation>
+        <translation>Det gick inte att spara programinställningarna. qBittorrent är antagligen inte nåbar.</translation>
     </message>
     <message>
         <source>IRC: #qbittorrent on Freenode</source>
@@ -157,11 +157,7 @@
     </message>
     <message>
         <source>Seeding time limit must be between 0 and 525600 minutes.</source>
-        <translation>Delningstidsgränsen måste vara mellan 0 och 525600 minuter.</translation>
-    </message>
-    <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Porten som användas för inkommande anslutningar måste vara mellan 1 och 65535.</translation>
+        <translation>Distributionstidsgränsen måste vara mellan 0 och 525600 minuter.</translation>
     </message>
     <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
@@ -169,7 +165,7 @@
     </message>
     <message>
         <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Kunde inte logga in. qBittorrent är troligtvis inte nåbart.</translation>
+        <translation>Det gick inte att logga in. qBittorrent är troligtvis inte nåbart.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Ursprungliga upphovsmän</translation>
+        <translation type="vanished">Ursprungliga upphovsmän</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Kaka:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Ange mapp här</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Byt namn på torrent</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Annan...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>Porten som används för inkommande anslutningar måste vara mellan 0 och 65535.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -621,11 +616,11 @@
     </message>
     <message>
         <source>Email notification upon download completion</source>
-        <translation>E-postavisering när hämtning slutförs</translation>
+        <translation>E-postavisering vid hämtning slutförs</translation>
     </message>
     <message>
         <source>Run external program on torrent completion</source>
-        <translation>Kör externt program när torrenten slutförs</translation>
+        <translation>Kör externt program vid slutföring av torrent</translation>
     </message>
     <message>
         <source>IP Filtering</source>
@@ -641,7 +636,7 @@
     </message>
     <message>
         <source>Automatically add these trackers to new downloads:</source>
-        <translation>Lägg a&amp;utomatiskt till dessa bevakare till nya hämtningar:</translation>
+        <translation>Lägg a&amp;utomatiskt till de här bevakarna till nya hämtningar:</translation>
     </message>
     <message>
         <source>Web User Interface (Remote control)</source>
@@ -689,7 +684,7 @@
     </message>
     <message>
         <source>Append .!qB extension to incomplete files</source>
-        <translation>Lägg till .!qB-ändelsen till ofullständiga filer</translation>
+        <translation>Lägg till ändelsen .!qB till ofullständiga filer</translation>
     </message>
     <message>
         <source>Automatically add torrents from:</source>
@@ -730,10 +725,6 @@
     <message>
         <source>Use UPnP / NAT-PMP port forwarding from my router</source>
         <translation>Använd UPnP / NAT-PMP-portomdirigering från min router</translation>
-    </message>
-    <message>
-        <source>Use different port on each startup</source>
-        <translation>Använd olika portar vid varje start</translation>
     </message>
     <message>
         <source>Connections Limits</source>
@@ -863,7 +854,7 @@
     </message>
     <message>
         <source>Privacy</source>
-        <translation>Sekretess</translation>
+        <translation>Integritet</translation>
     </message>
     <message>
         <source>Enable DHT (decentralized network) to find more peers</source>
@@ -907,11 +898,11 @@
     </message>
     <message>
         <source>Do not count slow torrents in these limits</source>
-        <translation>Räkna inte med långsamma torrenter i dessa begränsningar</translation>
+        <translation>Räkna inte långsamma torrenter med de här gränserna</translation>
     </message>
     <message>
         <source>then</source>
-        <translation>sedan</translation>
+        <translation>därefter</translation>
     </message>
     <message>
         <source>Use UPnP / NAT-PMP to forward the port from my router</source>
@@ -955,7 +946,7 @@
     </message>
     <message>
         <source>%D: Save path</source>
-        <translation>%D: Sparsökväg</translation>
+        <translation>%D: Sparningssökväg</translation>
     </message>
     <message>
         <source>%C: Number of files</source>
@@ -968,10 +959,6 @@
     <message>
         <source>%T: Current tracker</source>
         <translation>%T: Aktuell spårare</translation>
-    </message>
-    <message>
-        <source>%I: Info hash</source>
-        <translation>%I: Info hash</translation>
     </message>
     <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
@@ -1027,7 +1014,7 @@
     </message>
     <message>
         <source>Default Save Path:</source>
-        <translation>Standardsparsökväg:</translation>
+        <translation>Standardsparningssökväg:</translation>
     </message>
     <message>
         <source>The alternative Web UI files location cannot be blank.</source>
@@ -1063,7 +1050,7 @@
     </message>
     <message>
         <source>When Default Save Path changed:</source>
-        <translation>När standardsparsökvägen ändras:</translation>
+        <translation>När standardsparningssökvägen ändras:</translation>
     </message>
     <message>
         <source>Enable Host header validation</source>
@@ -1075,7 +1062,7 @@
     </message>
     <message>
         <source>When Category Save Path changed:</source>
-        <translation>När kategorisparsökvägen ändras:</translation>
+        <translation>När kategorisparningssökvägen ändras:</translation>
     </message>
     <message>
         <source>seconds</source>
@@ -1127,7 +1114,7 @@
     </message>
     <message>
         <source>Enable super seeding for torrent</source>
-        <translation>Aktivera superdelning för torrent</translation>
+        <translation>Aktivera superdistribution för torrent</translation>
     </message>
     <message>
         <source>Prefer TCP</source>
@@ -1151,7 +1138,7 @@
     </message>
     <message>
         <source>When seeding time reaches</source>
-        <translation>När delningstiden når</translation>
+        <translation>När distributionstiden når</translation>
     </message>
     <message>
         <source>Allow multiple connections from the same IP address:</source>
@@ -1167,7 +1154,7 @@
     </message>
     <message>
         <source>Always announce to all tiers:</source>
-        <translation>Meddela alltid till alla nivåer:</translation>
+        <translation>Annonsera alltid till alla nivåer:</translation>
     </message>
     <message>
         <source>Embedded tracker port:</source>
@@ -1191,7 +1178,7 @@
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
-        <translation>Skicka buffert vattenstämpelsfaktor:</translation>
+        <translation>Skicka buffertvattenstämpelsfaktor:</translation>
     </message>
     <message>
         <source>libtorrent Section</source>
@@ -1203,11 +1190,11 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>IP-adress att rapportera till bevakare (kräver omstart):</translation>
+        <translation type="vanished">IP-adress att rapportera till bevakare (kräver omstart):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
-        <translation>Kontrollera torrenter när de slutförs:</translation>
+        <translation>Kontrollera torrenter igen vid slutföring:</translation>
     </message>
     <message>
         <source>Allow encryption</source>
@@ -1239,7 +1226,7 @@
     </message>
     <message>
         <source>Send buffer watermark:</source>
-        <translation>Skicka buffert vattenstämpel:</translation>
+        <translation>Skicka buffertvattenstämpel:</translation>
     </message>
     <message>
         <source>Peer proportional (throttles TCP)</source>
@@ -1259,11 +1246,11 @@
     </message>
     <message>
         <source>Upload choking algorithm:</source>
-        <translation>Ladda upp strypningsalgoritm:</translation>
+        <translation>Strypningsalgoritm för sändning:</translation>
     </message>
     <message>
         <source>Seeding Limits</source>
-        <translation>Delningsgränser</translation>
+        <translation>Distributionsgränser</translation>
     </message>
     <message>
         <source>KiB</source>
@@ -1283,7 +1270,7 @@
     </message>
     <message>
         <source>Send buffer low watermark:</source>
-        <translation>Skicka buffert låg vattenstämpel:</translation>
+        <translation>Skicka låg buffertvattenstämpel:</translation>
     </message>
     <message>
         <source>Save resume data interval:</source>
@@ -1291,7 +1278,7 @@
     </message>
     <message>
         <source>Always announce to all trackers in a tier:</source>
-        <translation>Meddela alltid till alla bevakare i en nivå:</translation>
+        <translation>Annonsera alltid till alla bevakare i en nivå:</translation>
     </message>
     <message>
         <source>Session timeout:</source>
@@ -1311,7 +1298,7 @@
     </message>
     <message>
         <source>Stop tracker timeout:</source>
-        <translation type="unfinished" />
+        <translation>Stopptidsgräns för bevakare</translation>
     </message>
     <message>
         <source>Ban client after consecutive failures:</source>
@@ -1347,7 +1334,7 @@
     </message>
     <message>
         <source>Coalesce reads &amp; writes (requires libtorrent &lt; 2.0):</source>
-        <translation type="unfinished" />
+        <translation>Koalition läsningar &amp; skrivningar (kräver libtorrent &gt;= 2.0):</translation>
     </message>
     <message>
         <source>Peer turnover threshold percentage:</source>
@@ -1391,7 +1378,7 @@
     </message>
     <message>
         <source>Max concurrent HTTP announces (requires libtorrent &gt;= 1.2.7):</source>
-        <translation>Maximalt antal samtidiga HTTP-meddelande (kräver libtorrent &gt;= 1.2.7):</translation>
+        <translation>Maximalt antal samtidiga HTTP-annonseringar (kräver libtorrent &gt;= 1.2.7):</translation>
     </message>
     <message>
         <source> min</source>
@@ -1456,6 +1443,50 @@
     <message>
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Typ av tjänst (TOS) för anslutningar till noder</translation>
+    </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Utgående anslutningar per sekund:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Slumpmässig</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: Torrent-ID</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>Återannonsera alla bevakare när IP eller port ändrats:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Lista över betrodda proxyer:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Aktivera support för omvänd proxy</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: Info hash v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: Info hash v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1603,7 +1634,7 @@
     </message>
     <message>
         <source>ETA:</source>
-        <translation>Slutförs om:</translation>
+        <translation>Slutförs:</translation>
     </message>
     <message>
         <source>Uploaded:</source>
@@ -1611,7 +1642,7 @@
     </message>
     <message>
         <source>Seeds:</source>
-        <translation>Delningar:</translation>
+        <translation>Distributioner:</translation>
     </message>
     <message>
         <source>Download Speed:</source>
@@ -1686,12 +1717,8 @@
         <translation>Skapades:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Torrenthash:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
-        <translation>Sparsökväg:</translation>
+        <translation>Sparningssökväg:</translation>
     </message>
     <message>
         <source>Never</source>
@@ -1743,7 +1770,23 @@
     </message>
     <message>
         <source>%1 (seeded for %2)</source>
-        <translation>%1 (delad i %2)</translation>
+        <translation>%1 (distribuerad i %2)</translation>
+    </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Info hash v2:</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Info hash v1:</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>Ingen</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1754,7 +1797,7 @@
     </message>
     <message>
         <source>Override Save Location</source>
-        <translation>Åsidosatt spara plats</translation>
+        <translation>Åsidosatt sparningsplats</translation>
     </message>
     <message>
         <source>Monitored folder</source>
@@ -1762,15 +1805,15 @@
     </message>
     <message>
         <source>Default save location</source>
-        <translation>Standard spara plats</translation>
+        <translation>Standard sparningsplats</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Annan...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Ange mapp här</translation>
     </message>
 </context>
 <context>
@@ -1867,7 +1910,7 @@
     </message>
     <message>
         <source>Seeding (0)</source>
-        <translation>Delar (0)</translation>
+        <translation>Distribuerar (0)</translation>
     </message>
     <message>
         <source>Completed (0)</source>
@@ -1903,7 +1946,7 @@
     </message>
     <message>
         <source>Seeding (%1)</source>
-        <translation>Delar (%1)</translation>
+        <translation>Distribuerar (%1)</translation>
     </message>
     <message>
         <source>Completed (%1)</source>
@@ -1953,6 +1996,14 @@
         <source>Stalled (%1)</source>
         <translation>Avstannade (%1)</translation>
     </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>Kontrollerar (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>Kontrollerar (0)</translation>
+    </message>
 </context>
 <context>
     <name>TorrentContentModel</name>
@@ -1982,7 +2033,7 @@
     <message>
         <source>Seeds</source>
         <comment>i.e. full sources (often untranslated)</comment>
-        <translation>Delningar</translation>
+        <translation>Distributioner</translation>
     </message>
     <message>
         <source>Peers</source>
@@ -2074,7 +2125,7 @@
     <message>
         <source>Save path</source>
         <comment>Torrent save path</comment>
-        <translation>Sparsökväg</translation>
+        <translation>Sparningssökväg</translation>
     </message>
     <message>
         <source>Completed</source>
@@ -2154,7 +2205,7 @@
     </message>
     <message>
         <source>Seeds</source>
-        <translation>Delningar</translation>
+        <translation>Distributioner</translation>
     </message>
     <message>
         <source>Not working</source>
@@ -2245,11 +2296,11 @@
     </message>
     <message>
         <source>[F] Seeding</source>
-        <translation>[T] Delar</translation>
+        <translation>[T] Distribuerar</translation>
     </message>
     <message>
         <source>Seeding</source>
-        <translation>Delar</translation>
+        <translation>Distribuerar</translation>
     </message>
     <message>
         <source>Queued</source>
@@ -2293,7 +2344,11 @@
     </message>
     <message>
         <source>%1 (seeded for %2)</source>
-        <translation>%1 (delad i %2)</translation>
+        <translation>%1 (distribuerad i %2)</translation>
+    </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[T] Hämtar metadata</translation>
     </message>
 </context>
 <context>
@@ -2413,7 +2468,7 @@
     </message>
     <message>
         <source>Super seeding mode</source>
-        <translation>Superdelningsläge</translation>
+        <translation>Superdistributionsläge</translation>
     </message>
     <message>
         <source>Rename...</source>
@@ -2453,7 +2508,7 @@
     </message>
     <message>
         <source>Save path</source>
-        <translation>Sparsökväg</translation>
+        <translation>Sparningssökväg</translation>
     </message>
     <message>
         <source>Comma-separated tags:</source>
@@ -2470,10 +2525,6 @@
     <message>
         <source>Magnet link</source>
         <translation>Magnetlänk</translation>
-    </message>
-    <message>
-        <source>Hash</source>
-        <translation>Hash</translation>
     </message>
     <message>
         <source>Remove All</source>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Lägg till...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>Info hash v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>Info hash v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>Torrent-ID</translation>
     </message>
 </context>
 <context>
@@ -2632,7 +2695,7 @@
     <name>TorrentsController</name>
     <message>
         <source>Save path is empty</source>
-        <translation>Sparsökvägen är tom</translation>
+        <translation>Sparningssökväg är tom</translation>
     </message>
 </context>
 <context>
@@ -2662,7 +2725,7 @@
     <name>SearchEngineWidget</name>
     <message>
         <source>Seeds:</source>
-        <translation>Delningar:</translation>
+        <translation>Distributioner:</translation>
     </message>
     <message>
         <source>All plugins</source>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Resultat (visar</translation>
+        <translation type="vanished">Resultat (visar</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Öka fönsterbredden för att visa ytterligare filter</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>till</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2753,7 +2828,7 @@
     </message>
     <message>
         <source>Warning: Be sure to comply with your country's copyright laws when downloading torrents from any of these search engines.</source>
-        <translation>Varning: Var noga med att följa ditt lands upphovsrättslagar när du hämtar torrenter från någon av dessa sökmotorer.</translation>
+        <translation>Varning: Var noga med att följa ditt lands upphovsrättslagar när du hämtar torrenter från någon av de här sökmotorerna.</translation>
     </message>
     <message>
         <source>Check for updates</source>
@@ -2784,7 +2859,7 @@
     </message>
     <message>
         <source>Seeders</source>
-        <translation>Delare</translation>
+        <translation>Distributörer</translation>
     </message>
 </context>
 <context>
@@ -2884,7 +2959,7 @@
     </message>
     <message>
         <source>Untagged</source>
-        <translation>Otaggade</translation>
+        <translation>Utan taggar</translation>
     </message>
 </context>
 <context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>Upphovsmän</translation>
+        <translation type="vanished">Upphovsmän</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>Den fria databasen IP to Country Lite av DB-IP används för att slå upp nodernas länder. Databasen är licensierad enligt Creative Commons Attribution 4.0 International License</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3375,7 +3458,7 @@ Stöder formaten: S01E01, 1x1, 2017.12.31 och 31.12.2017 (datumformatet stöder 
     </message>
     <message>
         <source>Trackerless (%1)</source>
-        <translation>Bevakarlösa (%1)</translation>
+        <translation>Utan bevakare (%1)</translation>
     </message>
     <message>
         <source>Pause torrents</source>
@@ -3387,6 +3470,10 @@ Stöder formaten: S01E01, 1x1, 2017.12.31 och 31.12.2017 (datumformatet stöder 
     <message>
         <source>RSS feeds</source>
         <translation>RSS-flöden</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>Oläst</translation>
     </message>
 </context>
 </TS>

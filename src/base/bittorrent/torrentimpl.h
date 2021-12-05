@@ -51,16 +51,6 @@
 #include "torrent.h"
 #include "torrentinfo.h"
 
-#if (LIBTORRENT_VERSION_NUM == 20003)
-// file_prio_alert is missing to be forward declared in "libtorrent/fwd.hpp"
-namespace libtorrent
-{
-    TORRENT_VERSION_NAMESPACE_3
-    struct file_prio_alert;
-    TORRENT_VERSION_NAMESPACE_3_END
-}
-#endif
-
 namespace BitTorrent
 {
     class Session;
@@ -78,9 +68,15 @@ namespace BitTorrent
         HandleMetadata
     };
 
+    struct FileErrorInfo
+    {
+        lt::error_code error;
+        lt::operation_t operation;
+    };
+
     class TorrentImpl final : public QObject, public Torrent
     {
-        Q_DISABLE_COPY(TorrentImpl)
+        Q_DISABLE_COPY_MOVE(TorrentImpl)
         Q_DECLARE_TR_FUNCTIONS(BitTorrent::TorrentImpl)
 
     public:
@@ -131,8 +127,8 @@ namespace BitTorrent
         int seedingTimeLimit() const override;
 
         QString filePath(int index) const override;
-        QString fileName(int index) const override;
         qlonglong fileSize(int index) const override;
+        QStringList filePaths() const override;
         QStringList absoluteFilePaths() const override;
         QVector<DownloadPriority> filePriorities() const override;
 
@@ -154,7 +150,6 @@ namespace BitTorrent
         bool hasMetadata() const override;
         bool hasMissingFiles() const override;
         bool hasError() const override;
-        bool hasFilteredPieces() const override;
         int queuePosition() const override;
         QVector<TrackerEntry> trackers() const override;
         QVector<QUrl> urlSeeds() const override;
@@ -256,7 +251,8 @@ namespace BitTorrent
 
         void handleFastResumeRejectedAlert(const lt::fastresume_rejected_alert *p);
         void handleFileCompletedAlert(const lt::file_completed_alert *p);
-#if (LIBTORRENT_VERSION_NUM >= 20003)
+        void handleFileErrorAlert(const lt::file_error_alert *p);
+#ifdef QBT_USES_LIBTORRENT2
         void handleFilePrioAlert(const lt::file_prio_alert *p);
 #endif
         void handleFileRenamedAlert(const lt::file_renamed_alert *p);
@@ -306,11 +302,14 @@ namespace BitTorrent
 
         MaintenanceJob m_maintenanceJob = MaintenanceJob::None;
 
-        // Until libtorrent provide an "old_name" field in `file_renamed_alert`
-        // we will rely on this workaround to remove empty leftover folders
-        QHash<lt::file_index_t, QVector<QString>> m_oldPath;
+#ifndef QBT_USES_LIBTORRENT2
+        // Until libtorrent provided an "old_name" field in `file_renamed_alert`
+        // we relied on this workaround to remove empty leftover folders
+        QHash<int, QVector<QString>> m_oldPath;
+#endif
 
         QHash<QString, QMap<lt::tcp::endpoint, int>> m_trackerPeerCounts;
+        FileErrorInfo m_lastFileError;
 
         // Persistent data
         QString m_name;

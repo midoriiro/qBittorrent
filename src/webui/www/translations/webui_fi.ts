@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Start torrent</source>
-        <translation>Käynnistä torrentti</translation>
+        <translation>Käynnistä torrent</translation>
     </message>
     <message>
         <source>Skip hash check</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Pause torrents</source>
-        <translation>Keskeytä torrentit</translation>
+        <translation>Pysäytä torrentit</translation>
     </message>
     <message>
         <source>Delete torrents</source>
@@ -160,10 +160,6 @@
         <translation>Jakoajan aikarajan pitää olla 0 ja 525600 minuutin väliltä.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Sisääntuleville yhteyksille tarkoitetun portin numero pitää olla väliltä 1-65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>Web-käyttöliittymälle tarkoitetun portin numero pitää olla väliltä 1-65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Alkuperäiset tekijät</translation>
+        <translation type="vanished">Alkuperäiset tekijät</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Eväste:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Kirjoita kansio tähän</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Nimeä torrent uudelleen</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Muu...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -290,7 +277,7 @@
     </message>
     <message>
         <source>Upload local torrent</source>
-        <translation>Lähetä paikallinen torrentti</translation>
+        <translation>Lähetä paikallinen torrent</translation>
     </message>
     <message>
         <source>Are you sure you want to delete the selected torrents from the transfer list?</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -732,10 +727,6 @@
         <translation>Käytä UPnP-/NAT-PMP-portinohjausta reitittimeltä</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Käytä eri porttia joka käynnistyksen yhteydessä</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Yhteyksien rajat</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T: Nykyinen seurantapalvelin</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation type="unfinished" />
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>Seurantapalvelimille raportoitava IP-osoite (vaatii uudelleenkäynnistyksen):</translation>
+        <translation type="vanished">Seurantapalvelimille raportoitava IP-osoite (vaatii uudelleenkäynnistyksen):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1335,7 +1322,7 @@
     </message>
     <message>
         <source>Filters:</source>
-        <translation type="unfinished" />
+        <translation>Suodattimet:</translation>
     </message>
     <message>
         <source>Enable fetching RSS feeds</source>
@@ -1455,6 +1442,50 @@
     </message>
     <message>
         <source>Type of service (ToS) for connections to peers</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Random</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -1686,10 +1717,6 @@
         <translation>Luotu:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Torrentin tarkistussumma:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Tallennussijainti:</translation>
     </message>
@@ -1735,7 +1762,7 @@
     </message>
     <message>
         <source>Filter files...</source>
-        <translation type="unfinished" />
+        <translation>Suodata tiedostoja...</translation>
     </message>
     <message>
         <source>Rename...</source>
@@ -1743,6 +1770,22 @@
     </message>
     <message>
         <source>%1 (seeded for %2)</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Progress:</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>Pysähtynyt (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2198,7 +2249,7 @@
     </message>
     <message>
         <source>Download Priority</source>
-        <translation type="unfinished" />
+        <translation>Latauksen tärkeys</translation>
     </message>
     <message>
         <source>Name</source>
@@ -2293,6 +2344,10 @@
     </message>
     <message>
         <source>%1 (seeded for %2)</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>[F] Downloading metadata</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -2472,10 +2527,6 @@
         <translation>Magnet-linkki</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Tarkistussumma</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Poista kaikki</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Lisää...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2561,7 +2624,7 @@
     <message>
         <source>B</source>
         <comment>bytes</comment>
-        <translation>T</translation>
+        <translation>t</translation>
     </message>
     <message>
         <source>KiB</source>
@@ -2694,11 +2757,11 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Tulokset (näytetään</translation>
+        <translation type="vanished">Tulokset (näytetään</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished" />
+        <translation>Suodatin</translation>
     </message>
     <message>
         <source>Torrent names only</source>
@@ -2722,6 +2785,18 @@
     </message>
     <message>
         <source>Increase window width to display additional filters</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>to</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -2950,15 +3025,19 @@
         <translation>Kansallisuus:</translation>
     </message>
     <message>
-        <source>Author</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
         <source>Software Used</source>
         <translation>Käytetyt ohjelmistot</translation>
     </message>
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -3385,6 +3464,10 @@ Supports the formats: S01E01, 1x1, 2017.12.31 and 31.12.2017 (Date formats also 
     <name>FeedListWidget</name>
     <message>
         <source>RSS feeds</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Unread</source>
         <translation type="unfinished" />
     </message>
 </context>

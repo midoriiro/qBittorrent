@@ -57,7 +57,7 @@ namespace Ui
 class PropertiesWidget : public QWidget
 {
     Q_OBJECT
-    Q_DISABLE_COPY(PropertiesWidget)
+    Q_DISABLE_COPY_MOVE(PropertiesWidget)
 
 public:
     enum SlideState
@@ -82,6 +82,7 @@ public slots:
     void readSettings();
     void saveSettings();
     void reloadPreferences();
+    void displayFileListHeaderMenu();
     void openItem(const QModelIndex &index) const;
     void loadTrackers(BitTorrent::Torrent *const torrent);
 

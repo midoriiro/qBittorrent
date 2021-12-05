@@ -160,10 +160,6 @@
         <translation>Doba seedovania musí byť v rozsahu od 0 do 525600 minút.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Port pre prichádzajúce spojenia musí byť medzi 1 a 65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>Port pre webové rozhranie musí byť medzi 1 a 65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Pôvodní autori</translation>
+        <translation type="vanished">Pôvodní autori</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Cookie:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Napíšte sem názov priečinku</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Premenovať torrent</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Iné...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -374,6 +361,14 @@
     </message>
     <message>
         <source>OK</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Original author</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -732,10 +727,6 @@
         <translation>Použiť presmerovanie portov UPnP/NAT-PMP z môjho routera</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Použiť pri každom spustení iný port</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Obmedzenia spojení</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T: Aktuálny tracker</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: Info hash</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Tip: Ohraničiť parameter úvodzovkami, aby nedošlo k odstrihnutiu textu za medzerou (napr. "%N")</translation>
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>Akú IP adresu oznamovať trackeru (vyžaduje reštart):</translation>
+        <translation type="vanished">Akú IP adresu oznamovať trackeru (vyžaduje reštart):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1457,6 +1444,50 @@
         <source>Type of service (ToS) for connections to peers</source>
         <translation type="unfinished" />
     </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Random</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>PeerListWidget</name>
@@ -1686,10 +1717,6 @@
         <translation>Vytvorené:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Hash torrentu:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Uložené do:</translation>
     </message>
@@ -1743,6 +1770,22 @@
     </message>
     <message>
         <source>%1 (seeded for %2)</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Progress:</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>Pozastavené (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2295,6 +2346,10 @@
         <source>%1 (seeded for %2)</source>
         <translation type="unfinished" />
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2472,10 +2527,6 @@
         <translation>Magnet link</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Hash</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation> Odstrániť všetky</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Pridať...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Výsledky</translation>
+        <translation type="vanished">Výsledky</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2722,6 +2785,18 @@
     </message>
     <message>
         <source>Increase window width to display additional filters</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>to</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>Autor</translation>
+        <translation type="vanished">Autor</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>Bezplatná databáza IP to Country Lite od DB-IP sa používa na riešenie krajín peerov. Databáza je licencovaná podľa medzinárodnej licencie Creative Commons Attribution 4.0</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3385,6 +3468,10 @@ Supports the formats: S01E01, 1x1, 2017.12.31 and 31.12.2017 (Date formats also 
     <name>FeedListWidget</name>
     <message>
         <source>RSS feeds</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Unread</source>
         <translation type="unfinished" />
     </message>
 </context>

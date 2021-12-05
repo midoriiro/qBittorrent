@@ -1,5 +1,6 @@
 add_library(qbt_base STATIC
     # headers
+    3rdparty/expected.hpp
     algorithm.h
     asyncfilestorage.h
     bittorrent/abstractfilestorage.h
@@ -16,7 +17,7 @@ add_library(qbt_base STATIC
     bittorrent/infohash.h
     bittorrent/loadtorrentparams.h
     bittorrent/ltqhash.h
-    bittorrent/ltunderlyingtype.h
+    bittorrent/lttypecast.h
     bittorrent/magneturi.h
     bittorrent/nativesessionextension.h
     bittorrent/nativetorrentextension.h
@@ -37,7 +38,6 @@ add_library(qbt_base STATIC
     bittorrent/trackerentry.h
     digest32.h
     exceptions.h
-    filesystemwatcher.h
     global.h
     http/connection.h
     http/httperror.h
@@ -71,13 +71,13 @@ add_library(qbt_base STATIC
     rss/rss_item.h
     rss/rss_parser.h
     rss/rss_session.h
-    scanfoldersmodel.h
     search/searchdownloadhandler.h
     search/searchhandler.h
     search/searchpluginmanager.h
     settingsstorage.h
     tagset.h
     torrentfileguard.h
+    torrentfileswatcher.h
     torrentfilter.h
     types.h
     unicodestrings.h
@@ -122,7 +122,6 @@ add_library(qbt_base STATIC
     bittorrent/tracker.cpp
     bittorrent/trackerentry.cpp
     exceptions.cpp
-    filesystemwatcher.cpp
     http/connection.cpp
     http/httperror.cpp
     http/requestparser.cpp
@@ -151,13 +150,13 @@ add_library(qbt_base STATIC
     rss/rss_item.cpp
     rss/rss_parser.cpp
     rss/rss_session.cpp
-    scanfoldersmodel.cpp
     search/searchdownloadhandler.cpp
     search/searchhandler.cpp
     search/searchpluginmanager.cpp
     settingsstorage.cpp
     tagset.cpp
     torrentfileguard.cpp
+    torrentfileswatcher.cpp
     torrentfilter.cpp
     utils/bytearray.cpp
     utils/compare.cpp
@@ -178,7 +177,7 @@ target_link_libraries(qbt_base
         ZLIB::ZLIB
     PUBLIC
         LibtorrentRasterbar::torrent-rasterbar
-        Qt5::Core Qt5::Network Qt5::Sql Qt5::Xml
+        Qt::Core Qt::Network Qt::Sql Qt::Xml
         qbt_common_cfg
 )
 
@@ -205,5 +204,5 @@ if (NOT WEBUI)
 endif()
 
 if (DBUS)
-    target_link_libraries(qbt_base PUBLIC Qt5::DBus)
+    target_link_libraries(qbt_base PUBLIC Qt::DBus)
 endif()

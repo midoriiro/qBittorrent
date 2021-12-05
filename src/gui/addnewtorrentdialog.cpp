@@ -43,7 +43,6 @@
 #include "base/bittorrent/magneturi.h"
 #include "base/bittorrent/session.h"
 #include "base/bittorrent/torrent.h"
-#include "base/exceptions.h"
 #include "base/global.h"
 #include "base/net/downloadmanager.h"
 #include "base/settingsstorage.h"
@@ -64,12 +63,9 @@ namespace
 {
 #define SETTINGS_KEY(name) "AddNewTorrentDialog/" name
     const QString KEY_ENABLED = QStringLiteral(SETTINGS_KEY("Enabled"));
-    const QString KEY_DEFAULTCATEGORY = QStringLiteral(SETTINGS_KEY("DefaultCategory"));
-    const QString KEY_TREEHEADERSTATE = QStringLiteral(SETTINGS_KEY("TreeHeaderState"));
     const QString KEY_TOPLEVEL = QStringLiteral(SETTINGS_KEY("TopLevel"));
     const QString KEY_SAVEPATHHISTORY = QStringLiteral(SETTINGS_KEY("SavePathHistory"));
     const QString KEY_SAVEPATHHISTORYLENGTH = QStringLiteral(SETTINGS_KEY("SavePathHistoryLength"));
-    const QString KEY_REMEMBERLASTSAVEPATH = QStringLiteral(SETTINGS_KEY("RememberLastSavePath"));
 
     // just a shortcut
     inline SettingsStorage *settings()
@@ -84,13 +80,17 @@ const int AddNewTorrentDialog::maxPathHistoryLength;
 AddNewTorrentDialog::AddNewTorrentDialog(const BitTorrent::AddTorrentParams &inParams, QWidget *parent)
     : QDialog(parent)
     , m_ui(new Ui::AddNewTorrentDialog)
-    , m_contentModel(nullptr)
-    , m_contentDelegate(nullptr)
-    , m_hasMetadata(false)
-    , m_oldIndex(0)
     , m_torrentParams(inParams)
     , m_storeDialogSize(SETTINGS_KEY("DialogSize"))
+    , m_storeDefaultCategory(SETTINGS_KEY("DefaultCategory"))
+    , m_storeRememberLastSavePath(SETTINGS_KEY("RememberLastSavePath"))
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    , m_storeTreeHeaderState("GUI/Qt6/" SETTINGS_KEY("TreeHeaderState"))
+    , m_storeSplitterState("GUI/Qt6/" SETTINGS_KEY("SplitterState"))
+#else
+    , m_storeTreeHeaderState(SETTINGS_KEY("TreeHeaderState"))
     , m_storeSplitterState(SETTINGS_KEY("SplitterState"))
+#endif
 {
     // TODO: set dialog file properties using m_torrentParams.filePriorities
     m_ui->setupUi(this);
@@ -115,8 +115,7 @@ AddNewTorrentDialog::AddNewTorrentDialog(const BitTorrent::AddTorrentParams &inP
     populateSavePathComboBox();
     connect(m_ui->savePath, &FileSystemPathEdit::selectedPathChanged, this, &AddNewTorrentDialog::onSavePathChanged);
 
-    const bool rememberLastSavePath = settings()->loadValue(KEY_REMEMBERLASTSAVEPATH, false);
-    m_ui->checkBoxRememberLastSavePath->setChecked(rememberLastSavePath);
+    m_ui->checkBoxRememberLastSavePath->setChecked(m_storeRememberLastSavePath);
 
     m_ui->contentLayoutComboBox->setCurrentIndex(
                 static_cast<int>(m_torrentParams.contentLayout.value_or(session->torrentContentLayout())));
@@ -130,7 +129,7 @@ AddNewTorrentDialog::AddNewTorrentDialog(const BitTorrent::AddTorrentParams &inP
     // Load categories
     QStringList categories = session->categories().keys();
     std::sort(categories.begin(), categories.end(), Utils::Compare::NaturalLessThan<Qt::CaseInsensitive>());
-    auto defaultCategory = settings()->loadValue<QString>(KEY_DEFAULTCATEGORY);
+    const QString defaultCategory = m_storeDefaultCategory;
 
     if (!m_torrentParams.category.isEmpty())
         m_ui->categoryComboBox->addItem(m_torrentParams.category);
@@ -165,22 +164,22 @@ AddNewTorrentDialog::~AddNewTorrentDialog()
 
 bool AddNewTorrentDialog::isEnabled()
 {
-    return SettingsStorage::instance()->loadValue(KEY_ENABLED, true);
+    return settings()->loadValue(KEY_ENABLED, true);
 }
 
-void AddNewTorrentDialog::setEnabled(bool value)
+void AddNewTorrentDialog::setEnabled(const bool value)
 {
-    SettingsStorage::instance()->storeValue(KEY_ENABLED, value);
+    settings()->storeValue(KEY_ENABLED, value);
 }
 
 bool AddNewTorrentDialog::isTopLevel()
 {
-    return SettingsStorage::instance()->loadValue(KEY_TOPLEVEL, true);
+    return settings()->loadValue(KEY_TOPLEVEL, true);
 }
 
-void AddNewTorrentDialog::setTopLevel(bool value)
+void AddNewTorrentDialog::setTopLevel(const bool value)
 {
-    SettingsStorage::instance()->storeValue(KEY_TOPLEVEL, value);
+    settings()->storeValue(KEY_TOPLEVEL, value);
 }
 
 int AddNewTorrentDialog::savePathHistoryLength()
@@ -190,7 +189,7 @@ int AddNewTorrentDialog::savePathHistoryLength()
     return qBound(minPathHistoryLength, value, maxPathHistoryLength);
 }
 
-void AddNewTorrentDialog::setSavePathHistoryLength(int value)
+void AddNewTorrentDialog::setSavePathHistoryLength(const int value)
 {
     const int clampedValue = qBound(minPathHistoryLength, value, maxPathHistoryLength);
     const int oldValue = savePathHistoryLength();
@@ -205,8 +204,7 @@ void AddNewTorrentDialog::setSavePathHistoryLength(int value)
 void AddNewTorrentDialog::loadState()
 {
     Utils::Gui::resize(this, m_storeDialogSize);
-    m_ui->splitter->restoreState(m_storeSplitterState);
-    m_headerState = settings()->loadValue<QByteArray>(KEY_TREEHEADERSTATE);
+    m_ui->splitter->restoreState(m_storeSplitterState);;
 }
 
 void AddNewTorrentDialog::saveState()
@@ -214,7 +212,7 @@ void AddNewTorrentDialog::saveState()
     m_storeDialogSize = size();
     m_storeSplitterState = m_ui->splitter->saveState();
     if (m_contentModel)
-        settings()->storeValue(KEY_TREEHEADERSTATE, m_ui->contentTreeView->header()->saveState());
+        m_storeTreeHeaderState = m_ui->contentTreeView->header()->saveState();
 }
 
 void AddNewTorrentDialog::show(const QString &source, const BitTorrent::AddTorrentParams &inParams, QWidget *parent)
@@ -252,13 +250,13 @@ bool AddNewTorrentDialog::loadTorrentFile(const QString &torrentPath)
         ? QUrl::fromEncoded(torrentPath.toLocal8Bit()).toLocalFile()
         : torrentPath;
 
-    QString error;
-    m_torrentInfo = BitTorrent::TorrentInfo::loadFromFile(decodedPath, &error);
-    if (!m_torrentInfo.isValid())
+    const nonstd::expected<BitTorrent::TorrentInfo, QString> result = BitTorrent::TorrentInfo::loadFromFile(decodedPath);
+    m_torrentInfo = result.value_or(BitTorrent::TorrentInfo());
+    if (!result)
     {
         RaisedMessageBox::critical(this, tr("Invalid torrent")
             , tr("Failed to load the torrent: %1.\nError: %2", "Don't remove the '\n' characters. They insert a newline.")
-                .arg(Utils::Fs::toNativePath(decodedPath), error));
+                .arg(Utils::Fs::toNativePath(decodedPath), result.error()));
         return false;
     }
 
@@ -296,7 +294,8 @@ bool AddNewTorrentDialog::loadTorrentImpl()
         return false;
     }
 
-    m_ui->labelHashData->setText(torrentID.toString());
+    m_ui->labelInfohash1Data->setText(m_torrentInfo.infoHash().v1().isValid() ? m_torrentInfo.infoHash().v1().toString() : tr("N/A"));
+    m_ui->labelInfohash2Data->setText(m_torrentInfo.infoHash().v2().isValid() ? m_torrentInfo.infoHash().v2().toString() : tr("N/A"));
     setupTreeview();
     TMMChanged(m_ui->comboTTM->currentIndex());
     return true;
@@ -348,7 +347,8 @@ bool AddNewTorrentDialog::loadMagnet(const BitTorrent::MagnetUri &magnetUri)
 
     BitTorrent::Session::instance()->downloadMetadata(magnetUri);
     setMetadataProgressIndicator(true, tr("Retrieving metadata..."));
-    m_ui->labelHashData->setText(torrentID.toString());
+    m_ui->labelInfohash1Data->setText(magnetUri.infoHash().v1().isValid() ? magnetUri.infoHash().v1().toString() : tr("N/A"));
+    m_ui->labelInfohash2Data->setText(magnetUri.infoHash().v2().isValid() ? magnetUri.infoHash().v2().toString() : tr("N/A"));
 
     m_magnetURI = magnetUri;
     return true;
@@ -405,8 +405,10 @@ void AddNewTorrentDialog::updateDiskSpaceLabel()
             const QVector<BitTorrent::DownloadPriority> priorities = m_contentModel->model()->getFilePriorities();
             Q_ASSERT(priorities.size() == m_torrentInfo.filesCount());
             for (int i = 0; i < priorities.size(); ++i)
+            {
                 if (priorities[i] > BitTorrent::DownloadPriority::Ignored)
                     torrentSize += m_torrentInfo.fileSize(i);
+            }
         }
         else
         {
@@ -458,7 +460,7 @@ void AddNewTorrentDialog::saveTorrentFile()
     Q_ASSERT(m_hasMetadata);
 
     const QString torrentFileExtension {C_TORRENT_FILE_EXTENSION};
-    const QString filter {QString{"Torrent file (*%1)"}.arg(torrentFileExtension)};
+    const QString filter {tr("Torrent file (*%1)").arg(torrentFileExtension)};
 
     QString path = QFileDialog::getSaveFileName(
                 this, tr("Save as torrent file")
@@ -469,13 +471,11 @@ void AddNewTorrentDialog::saveTorrentFile()
     if (!path.endsWith(torrentFileExtension, Qt::CaseInsensitive))
         path += torrentFileExtension;
 
-    try
+    const nonstd::expected<void, QString> result = m_torrentInfo.saveToFile(path);
+    if (!result)
     {
-        m_torrentInfo.saveToFile(path);
-    }
-    catch (const RuntimeError &err)
-    {
-        QMessageBox::critical(this, tr("I/O Error"), err.message());
+        QMessageBox::critical(this, tr("I/O Error")
+            , tr("Couldn't export torrent metadata file '%1'. Reason: %2.").arg(path, result.error()));
     }
 }
 
@@ -488,12 +488,11 @@ void AddNewTorrentDialog::populateSavePathComboBox()
     for (const QString &savePath : savePathHistory)
         m_ui->savePath->addItem(savePath);
 
-    const bool rememberLastSavePath {settings()->loadValue(KEY_REMEMBERLASTSAVEPATH, false)};
     const QString defSavePath {BitTorrent::Session::instance()->defaultSavePath()};
 
     if (!m_torrentParams.savePath.isEmpty())
         setSavePath(m_torrentParams.savePath);
-    else if (!rememberLastSavePath)
+    else if (!m_storeRememberLastSavePath)
         setSavePath(defSavePath);
     // else last used save path will be selected since it is the first in the list
 }
@@ -606,9 +605,9 @@ void AddNewTorrentDialog::accept()
     // Category
     m_torrentParams.category = m_ui->categoryComboBox->currentText();
     if (m_ui->defaultCategoryCheckbox->isChecked())
-        settings()->storeValue(KEY_DEFAULTCATEGORY, m_torrentParams.category);
+        m_storeDefaultCategory = m_torrentParams.category;
 
-    settings()->storeValue(KEY_REMEMBERLASTSAVEPATH, m_ui->checkBoxRememberLastSavePath->isChecked());
+    m_storeRememberLastSavePath = m_ui->checkBoxRememberLastSavePath->isChecked();
 
     // Save file priorities
     if (m_contentModel)
@@ -676,6 +675,13 @@ void AddNewTorrentDialog::updateMetadata(const BitTorrent::TorrentInfo &metadata
     // Update UI
     setupTreeview();
     setMetadataProgressIndicator(false, tr("Metadata retrieval complete"));
+
+    m_ui->buttonSave->setVisible(true);
+    if (m_torrentInfo.infoHash().v2().isValid())
+    {
+        m_ui->buttonSave->setEnabled(false);
+        m_ui->buttonSave->setToolTip(tr("Cannot create v2 torrent until its data is fully downloaded."));
+    }
 }
 
 void AddNewTorrentDialog::setMetadataProgressIndicator(bool visibleIndicator, const QString &labelText)
@@ -684,7 +690,6 @@ void AddNewTorrentDialog::setMetadataProgressIndicator(bool visibleIndicator, co
     m_ui->lblMetaLoading->setVisible(true);
     m_ui->lblMetaLoading->setText(labelText);
     m_ui->progMetaLoading->setVisible(visibleIndicator);
-    m_ui->buttonSave->setVisible(!visibleIndicator);
 }
 
 void AddNewTorrentDialog::setupTreeview()
@@ -715,8 +720,8 @@ void AddNewTorrentDialog::setupTreeview()
 
         // List files in torrent
         m_contentModel->model()->setupModelData(m_torrentInfo);
-        if (!m_headerState.isEmpty())
-            m_ui->contentTreeView->header()->restoreState(m_headerState);
+        if (const QByteArray state = m_storeTreeHeaderState; !state.isEmpty())
+            m_ui->contentTreeView->header()->restoreState(state);
 
         // Hide useless columns after loading the header state
         m_ui->contentTreeView->hideColumn(PROGRESS);
@@ -735,36 +740,38 @@ void AddNewTorrentDialog::setupTreeview()
     updateDiskSpaceLabel();
 }
 
-void AddNewTorrentDialog::handleDownloadFinished(const Net::DownloadResult &result)
+void AddNewTorrentDialog::handleDownloadFinished(const Net::DownloadResult &downloadResult)
 {
-    QString error;
-    switch (result.status)
+    switch (downloadResult.status)
     {
     case Net::DownloadStatus::Success:
-        m_torrentInfo = BitTorrent::TorrentInfo::load(result.data, &error);
-        if (!m_torrentInfo.isValid())
         {
-            RaisedMessageBox::critical(this, tr("Invalid torrent"), tr("Failed to load from URL: %1.\nError: %2")
-                                       .arg(result.url, error));
-            return;
+            const nonstd::expected<BitTorrent::TorrentInfo, QString> result = BitTorrent::TorrentInfo::load(downloadResult.data);
+            m_torrentInfo = result.value_or(BitTorrent::TorrentInfo());
+            if (!result)
+            {
+                RaisedMessageBox::critical(this, tr("Invalid torrent"), tr("Failed to load from URL: %1.\nError: %2")
+                                           .arg(downloadResult.url, result.error()));
+                return;
+            }
+
+            m_torrentGuard = std::make_unique<TorrentFileGuard>();
+
+            if (loadTorrentImpl())
+                open();
+            else
+                deleteLater();
         }
-
-        m_torrentGuard = std::make_unique<TorrentFileGuard>();
-
-        if (loadTorrentImpl())
-            open();
-        else
-            deleteLater();
         break;
     case Net::DownloadStatus::RedirectedToMagnet:
-        if (loadMagnet(BitTorrent::MagnetUri(result.magnet)))
+        if (loadMagnet(BitTorrent::MagnetUri(downloadResult.magnet)))
             open();
         else
             deleteLater();
         break;
     default:
         RaisedMessageBox::critical(this, tr("Download Error"),
-            tr("Cannot download '%1': %2").arg(result.url, result.errorString));
+            tr("Cannot download '%1': %2").arg(downloadResult.url, downloadResult.errorString));
         deleteLater();
     }
 }

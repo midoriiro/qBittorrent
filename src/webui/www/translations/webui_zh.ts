@@ -160,10 +160,6 @@
         <translation>做种时间限制必须在 0 和 525600 分钟之间。</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>用于传入连接的端口必须大于 1 且小于 65535。</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>用于 Web UI 的端口必须大于 1 且小于 65535。</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>原作者</translation>
+        <translation type="vanished">原作者</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Cookie：</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">在此输入文件夹名称</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>重命名 torrent</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">其他...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -358,7 +345,7 @@
     </message>
     <message>
         <source>JavaScript Required! You must enable JavaScript for the Web UI to work properly</source>
-        <translation>JavaScript 未启用! 你必须启用 JavaScript 以确保 Web UI 工作正常</translation>
+        <translation>需要 JavaScript！您必须启用 JavaScript 以确保 Web UI 正常运行</translation>
     </message>
     <message>
         <source>Name cannot be empty</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>确定</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>用于传入连接的端口必须介于 0 和 65535 之间。</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -732,10 +727,6 @@
         <translation>使用我的路由器的 UPnP / NAT-PMP 功能来转发端口</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>在每次启动时使用不同的端口</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>连接限制</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T：当前 tracker</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I：哈希值</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>提示：使用引号将参数扩起以防止文本被空白符分割（例如："%N"）</translation>
     </message>
@@ -1107,7 +1094,7 @@
     </message>
     <message>
         <source>Info: The password is saved unencrypted</source>
-        <translation>提示：密码未加密</translation>
+        <translation>提示：储存的密码未被加密</translation>
     </message>
     <message>
         <source>μTP-TCP mixed mode algorithm:</source>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>向 Tracker 汇报的 IP 地址 (需要重启):</translation>
+        <translation type="vanished">向 Tracker 汇报的 IP 地址 (需要重启):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1375,7 +1362,7 @@
     </message>
     <message>
         <source>Download REPACK/PROPER episodes</source>
-        <translation>下载下载 REPACK/PROPER 版剧集</translation>
+        <translation>下载 REPACK/PROPER 版剧集</translation>
     </message>
     <message>
         <source>Feeds refresh interval:</source>
@@ -1391,7 +1378,7 @@
     </message>
     <message>
         <source>Max concurrent HTTP announces (requires libtorrent &gt;= 1.2.7):</source>
-        <translation>最大并发 HTTP 发布（需要libtorrent&gt; = 1.2.7）：</translation>
+        <translation>最大并发 HTTP 发布（需要 libtorrent &gt; = 1.2.7）：</translation>
     </message>
     <message>
         <source> min</source>
@@ -1403,7 +1390,7 @@
     </message>
     <message>
         <source>Optional IP address to bind to:</source>
-        <translation>绑定到的可选IP地址：</translation>
+        <translation>绑定到的可选 IP 地址：</translation>
     </message>
     <message>
         <source>Disallow connection to peers on privileged ports:</source>
@@ -1419,11 +1406,11 @@
     </message>
     <message>
         <source>Disk cache (requires libtorrent &lt; 2.0):</source>
-        <translation>磁盘缓存（需要libtorrent &lt;2.0）：</translation>
+        <translation>磁盘缓存（需要 libtorrent  &lt; 2.0）：</translation>
     </message>
     <message>
         <source>Disk cache expiry interval (requires libtorrent &lt; 2.0):</source>
-        <translation>磁盘缓存过期时间间隔（要求libtorrent &lt;2.0）：</translation>
+        <translation>磁盘缓存过期时间间隔（要求 libtorrent &lt; 2.0）：</translation>
     </message>
     <message>
         <source>Validate HTTPS tracker certificate:</source>
@@ -1435,7 +1422,7 @@
     </message>
     <message>
         <source>Support internationalized domain name (IDN) (requires libtorrent &gt;= 1.2.12):</source>
-        <translation>支持国际化域名（IDN） (需要 libtorrent &gt;= 1.2.12):</translation>
+        <translation>支持国际化域名（IDN）（需要 libtorrent &gt;= 1.2.12）：</translation>
     </message>
     <message>
         <source>Torrent content layout:</source>
@@ -1456,6 +1443,50 @@
     <message>
         <source>Type of service (ToS) for connections to peers</source>
         <translation>与 peers 连接的服务类型（ToS）</translation>
+    </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>每秒传出连接数：</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>随机</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: Torrent ID</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>当 IP 或端口更改时，重新通知所有 trackers：</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>受信任的代理列表：</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>启用反向代理支持</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J：信息哈希值 v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: 信息哈希值 v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1686,10 +1717,6 @@
         <translation>创建于：</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Torrent 哈希值：</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>保存路径：</translation>
     </message>
@@ -1745,6 +1772,22 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (已做种 %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>信息哈希值 v2：</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>信息哈希值 v1：</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/A</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1766,11 +1809,11 @@
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>其他...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>在此处输入文件夹</translation>
     </message>
 </context>
 <context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>暂停 (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>正在检查 (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>正在检查 (0)</translation>
     </message>
 </context>
 <context>
@@ -2295,6 +2346,10 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (已做种 %2)</translation>
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[F] 下载元数据</translation>
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2472,10 +2527,6 @@
         <translation>磁力链接</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>哈希值</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>删除全部</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>添加...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>信息哈希值 v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>信息哈希值 v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>Torrent ID</translation>
     </message>
 </context>
 <context>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>结果 (显示</translation>
+        <translation type="vanished">结果 (显示</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>增加窗口宽度以显示其他过滤器</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>到</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>作者</translation>
+        <translation type="vanished">作者</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2959,7 +3034,15 @@
     </message>
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
-        <translation>DB-IP提供的免费IP to Country Lite数据库用于解析节点所在的国家。 该数据库已根据知识共享署名4.0国际许可协议获得许可</translation>
+        <translation>由 DB-IP 提供的免费 IP to Country Lite 数据库，用于解析节点所在的国家。该数据库已根据知识共享署名 4.0 国际许可协议获得许可</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3126,7 +3209,7 @@
     </message>
     <message>
         <source>* to match zero or more of any characters</source>
-        <translation>* —— 匹配 0 个或多个任意字符</translation>
+        <translation>* ——匹配 0 个或多个任意字符</translation>
     </message>
     <message>
         <source> will match all articles.</source>
@@ -3162,7 +3245,7 @@
     </message>
     <message>
         <source>? to match any single character</source>
-        <translation>? —— 匹配任意单个字符</translation>
+        <translation>? ——匹配任意单个字符</translation>
     </message>
     <message>
         <source>Matches articles based on episode filter.</source>
@@ -3218,7 +3301,7 @@
     </message>
     <message>
         <source>Must Not Contain:</source>
-        <translation>必须不含：</translation>
+        <translation>不可包含：</translation>
     </message>
     <message>
         <source>Single number: &lt;b&gt;1x25;&lt;/b&gt; matches episode 25 of season one</source>
@@ -3387,6 +3470,10 @@ Supports the formats: S01E01, 1x1, 2017.12.31 and 31.12.2017 (Date formats also 
     <message>
         <source>RSS feeds</source>
         <translation>RSS 订阅列表</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>未读</translation>
     </message>
 </context>
 </TS>

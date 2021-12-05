@@ -36,7 +36,6 @@
 #include <libtorrent/add_torrent_params.hpp>
 #include <libtorrent/fwd.hpp>
 #include <libtorrent/torrent_handle.hpp>
-#include <libtorrent/version.hpp>
 
 #include <QHash>
 #include <QPointer>
@@ -80,12 +79,6 @@ enum DeleteOption
 {
     DeleteTorrent,
     DeleteTorrentAndFiles
-};
-
-enum TorrentExportFolder
-{
-    Regular,
-    Finished
 };
 
 namespace Net
@@ -197,7 +190,7 @@ namespace BitTorrent
         {
             int diskBlocksInUse = -1;
             int numBlocksRead = -1;
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
             int numBlocksCacheHits = -1;
 #endif
             int writeJobs = -1;
@@ -211,7 +204,7 @@ namespace BitTorrent
     class Session : public QObject
     {
         Q_OBJECT
-        Q_DISABLE_COPY(Session)
+        Q_DISABLE_COPY_MOVE(Session)
 
     public:
         static void initInstance();
@@ -312,8 +305,6 @@ namespace BitTorrent
         void setSaveResumeDataInterval(int value);
         int port() const;
         void setPort(int port);
-        bool useRandomPort() const;
-        void setUseRandomPort(bool value);
         QString networkInterface() const;
         void setNetworkInterface(const QString &iface);
         QString networkInterfaceName() const;
@@ -372,6 +363,8 @@ namespace BitTorrent
         void setSendBufferLowWatermark(int value);
         int sendBufferWatermarkFactor() const;
         void setSendBufferWatermarkFactor(int value);
+        int connectionSpeed() const;
+        void setConnectionSpeed(int value);
         int socketBacklogSize() const;
         void setSocketBacklogSize(int value);
         bool isAnonymousModeEnabled() const;
@@ -402,6 +395,9 @@ namespace BitTorrent
         void setAnnounceIP(const QString &ip);
         int maxConcurrentHTTPAnnounces() const;
         void setMaxConcurrentHTTPAnnounces(int value);
+        bool isReannounceWhenAddressChangedEnabled() const;
+        void setReannounceWhenAddressChangedEnabled(bool enabled);
+        void reannounceToAllTrackers() const;
         int stopTrackerTimeout() const;
         void setStopTrackerTimeout(int value);
         int maxConnections() const;
@@ -430,6 +426,8 @@ namespace BitTorrent
         void setMultiConnectionsPerIpEnabled(bool enabled);
         bool validateHTTPSTrackerCertificate() const;
         void setValidateHTTPSTrackerCertificate(bool enabled);
+        bool isSSRFMitigationEnabled() const;
+        void setSSRFMitigationEnabled(bool enabled);
         bool blockPeersOnPrivilegedPorts() const;
         void setBlockPeersOnPrivilegedPorts(bool enabled);
         bool isTrackerFilteringEnabled() const;
@@ -609,7 +607,7 @@ namespace BitTorrent
         bool addTorrent_impl(const std::variant<MagnetUri, TorrentInfo> &source, const AddTorrentParams &addTorrentParams);
 
         void updateSeedingLimitTimer();
-        void exportTorrentFile(const Torrent *torrent, TorrentExportFolder folder = TorrentExportFolder::Regular);
+        void exportTorrentFile(const TorrentInfo &torrentInfo, const QString &folderPath, const QString &baseName);
 
         void handleAlert(const lt::alert *a);
         void dispatchTorrentAlert(const lt::alert *a);
@@ -674,6 +672,7 @@ namespace BitTorrent
         CachedSettingValue<int> m_sendBufferWatermark;
         CachedSettingValue<int> m_sendBufferLowWatermark;
         CachedSettingValue<int> m_sendBufferWatermarkFactor;
+        CachedSettingValue<int> m_connectionSpeed;
         CachedSettingValue<int> m_socketBacklogSize;
         CachedSettingValue<bool> m_isAnonymousModeEnabled;
         CachedSettingValue<bool> m_isQueueingEnabled;
@@ -692,6 +691,7 @@ namespace BitTorrent
         CachedSettingValue<bool> m_includeOverheadInLimits;
         CachedSettingValue<QString> m_announceIP;
         CachedSettingValue<int> m_maxConcurrentHTTPAnnounces;
+        CachedSettingValue<bool> m_isReannounceWhenAddressChangedEnabled;
         CachedSettingValue<int> m_stopTrackerTimeout;
         CachedSettingValue<int> m_maxConnections;
         CachedSettingValue<int> m_maxUploads;
@@ -703,6 +703,7 @@ namespace BitTorrent
         CachedSettingValue<bool> m_IDNSupportEnabled;
         CachedSettingValue<bool> m_multiConnectionsPerIpEnabled;
         CachedSettingValue<bool> m_validateHTTPSTrackerCertificate;
+        CachedSettingValue<bool> m_SSRFMitigationEnabled;
         CachedSettingValue<bool> m_blockPeersOnPrivilegedPorts;
         CachedSettingValue<bool> m_isAddTrackersEnabled;
         CachedSettingValue<QString> m_additionalTrackers;
@@ -723,7 +724,6 @@ namespace BitTorrent
         CachedSettingValue<bool> m_isBandwidthSchedulerEnabled;
         CachedSettingValue<int> m_saveResumeDataInterval;
         CachedSettingValue<int> m_port;
-        CachedSettingValue<bool> m_useRandomPort;
         CachedSettingValue<QString> m_networkInterface;
         CachedSettingValue<QString> m_networkInterfaceName;
         CachedSettingValue<QString> m_networkInterfaceAddress;
@@ -799,6 +799,8 @@ namespace BitTorrent
 #endif
 
         QList<MoveStorageJob> m_moveStorageQueue;
+
+        QString m_lastExternalIP;
 
         static Session *m_instance;
     };

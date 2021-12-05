@@ -28,8 +28,7 @@
 
 #pragma once
 
-#include <libtorrent/version.hpp>
-#if (LIBTORRENT_VERSION_NUM >= 20000)
+#ifdef QBT_USES_LIBTORRENT2
 #include <libtorrent/info_hash.hpp>
 #endif
 
@@ -58,17 +57,18 @@ namespace BitTorrent
     class InfoHash
     {
     public:
-#if (LIBTORRENT_VERSION_NUM >= 20000)
+#ifdef QBT_USES_LIBTORRENT2
         using WrappedType = lt::info_hash_t;
 #else
         using WrappedType = lt::sha1_hash;
 #endif
 
         InfoHash() = default;
-        InfoHash(const InfoHash &other) = default;
         InfoHash(const WrappedType &nativeHash);
 
         bool isValid() const;
+        SHA1Hash v1() const;
+        SHA256Hash v2() const;
         TorrentID toTorrentID() const;
 
         operator WrappedType() const;

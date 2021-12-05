@@ -30,6 +30,7 @@
 #pragma once
 
 #include <QtContainerFwd>
+#include <QtGlobal>
 #include <QVariant>
 
 #include "base/utils/net.h"
@@ -76,11 +77,11 @@ namespace DNS
 class Preferences : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(Preferences)
+    Q_DISABLE_COPY_MOVE(Preferences)
 
     Preferences();
 
-    const QVariant value(const QString &key, const QVariant &defaultValue = {}) const;
+    QVariant value(const QString &key, const QVariant &defaultValue = {}) const;
     void setValue(const QString &key, const QVariant &value);
 
     static Preferences *m_instance;
@@ -132,8 +133,6 @@ public:
     // Downloads
     QString lastLocationPath() const;
     void setLastLocationPath(const QString &path);
-    QVariantHash getScanDirs() const;
-    void setScanDirs(const QVariantHash &dirs);
     QString getScanDirsLastPath() const;
     void setScanDirsLastPath(const QString &path);
     bool isMailNotificationEnabled() const;
@@ -226,6 +225,12 @@ public:
     void setWebUICustomHTTPHeadersEnabled(bool enabled);
     QString getWebUICustomHTTPHeaders() const;
     void setWebUICustomHTTPHeaders(const QString &headers);
+
+    // Reverse proxy
+    bool isWebUIReverseProxySupportEnabled() const;
+    void setWebUIReverseProxySupportEnabled(bool enabled);
+    QString getWebUITrustedReverseProxiesList() const;
+    void setWebUITrustedReverseProxiesList(const QString &addr);
 
     // Dynamic DNS
     bool isDynDNSEnabled() const;

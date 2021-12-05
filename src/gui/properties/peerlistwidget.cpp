@@ -90,6 +90,8 @@ PeerListWidget::PeerListWidget(PropertiesWidget *parent)
     setEditTriggers(QAbstractItemView::NoEditTriggers);
     setSelectionMode(QAbstractItemView::ExtendedSelection);
     header()->setStretchLastSection(false);
+    header()->setTextElideMode(Qt::ElideRight);
+
     // List Model
     m_listModel = new QStandardItemModel(0, PeerListColumns::COL_COUNT, this);
     m_listModel->setHeaderData(PeerListColumns::COUNTRY, Qt::Horizontal, tr("Country/Region")); // Country flag column
@@ -447,7 +449,7 @@ void PeerListWidget::updatePeer(const BitTorrent::Torrent *torrent, const BitTor
     setModelData(row, PeerListColumns::CONNECTION, peer.connectionType(), peer.connectionType());
     setModelData(row, PeerListColumns::FLAGS, peer.flags(), peer.flags(), {}, peer.flagsDescription());
     const QString client = peer.client().toHtmlEscaped();
-    setModelData(row, PeerListColumns::CLIENT, client, client);
+    setModelData(row, PeerListColumns::CLIENT, client, client, {}, client);
     setModelData(row, PeerListColumns::PROGRESS, (Utils::String::fromDouble(peer.progress() * 100, 1) + '%'), peer.progress(), intDataTextAlignment);
     const QString downSpeed = (hideValues && (peer.payloadDownSpeed() <= 0)) ? QString {} : Utils::Misc::friendlyUnit(peer.payloadDownSpeed(), true);
     setModelData(row, PeerListColumns::DOWN_SPEED, downSpeed, peer.payloadDownSpeed(), intDataTextAlignment);
@@ -461,7 +463,7 @@ void PeerListWidget::updatePeer(const BitTorrent::Torrent *torrent, const BitTor
 
     const QStringList downloadingFiles {torrent->info().filesForPiece(peer.downloadingPieceIndex())};
     const QString downloadingFilesDisplayValue = downloadingFiles.join(';');
-    setModelData(row, PeerListColumns::DOWNLOADING_PIECE, downloadingFilesDisplayValue, downloadingFilesDisplayValue, {}, downloadingFiles.join('\n'));
+    setModelData(row, PeerListColumns::DOWNLOADING_PIECE, downloadingFilesDisplayValue, downloadingFilesDisplayValue, {}, downloadingFiles.join(QLatin1Char('\n')));
 
     if (m_resolver)
         m_resolver->resolve(peerEndpoint.address.ip);
@@ -502,15 +504,9 @@ void PeerListWidget::wheelEvent(QWheelEvent *event)
     {
         // Shift + scroll = horizontal scroll
         event->accept();
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
         QWheelEvent scrollHEvent(event->position(), event->globalPosition()
             , event->pixelDelta(), event->angleDelta().transposed(), event->buttons()
             , event->modifiers(), event->phase(), event->inverted(), event->source());
-#else
-        QWheelEvent scrollHEvent(event->pos(), event->globalPos()
-            , event->delta(), event->buttons(), event->modifiers(), Qt::Horizontal);
-#endif
         QTreeView::wheelEvent(&scrollHEvent);
         return;
     }

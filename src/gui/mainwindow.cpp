@@ -55,14 +55,11 @@
 
 #include "base/bittorrent/session.h"
 #include "base/bittorrent/sessionstatus.h"
-#include "base/bittorrent/torrent.h"
 #include "base/global.h"
-#include "base/logger.h"
 #include "base/net/downloadmanager.h"
 #include "base/preferences.h"
 #include "base/rss/rss_folder.h"
 #include "base/rss/rss_session.h"
-#include "base/settingsstorage.h"
 #include "base/utils/foreignapps.h"
 #include "base/utils/fs.h"
 #include "base/utils/misc.h"
@@ -106,33 +103,13 @@ using namespace std::chrono_literals;
 namespace
 {
 #define SETTINGS_KEY(name) "GUI/" name
-
-    // ExecutionLog properties keys
-#define EXECUTIONLOG_SETTINGS_KEY(name) QStringLiteral(SETTINGS_KEY("Log/") name)
-    const QString KEY_EXECUTIONLOG_ENABLED = EXECUTIONLOG_SETTINGS_KEY("Enabled");
-    const QString KEY_EXECUTIONLOG_TYPES = EXECUTIONLOG_SETTINGS_KEY("Types");
-
-    // Notifications properties keys
-#define NOTIFICATIONS_SETTINGS_KEY(name) QStringLiteral(SETTINGS_KEY("Notifications/") name)
-    const QString KEY_NOTIFICATIONS_ENABLED = NOTIFICATIONS_SETTINGS_KEY("Enabled");
-    const QString KEY_NOTIFICATIONS_TORRENTADDED = NOTIFICATIONS_SETTINGS_KEY("TorrentAdded");
-#if (defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)) && defined(QT_DBUS_LIB)
-    const QString KEY_NOTIFICATION_TIMEOUT = NOTIFICATIONS_SETTINGS_KEY("Timeout");
-#endif
-
-    // Misc
-    const QString KEY_DOWNLOAD_TRACKER_FAVICON = QStringLiteral(SETTINGS_KEY("DownloadTrackerFavicon"));
+#define EXECUTIONLOG_SETTINGS_KEY(name) (SETTINGS_KEY("Log/") name)
+#define NOTIFICATIONS_SETTINGS_KEY(name) (SETTINGS_KEY("Notifications/") name)
 
     const std::chrono::seconds PREVENT_SUSPEND_INTERVAL {60};
 #if !defined(Q_OS_MACOS)
     const int TIME_TRAY_BALLOON = 5000;
 #endif
-
-    // just a shortcut
-    inline SettingsStorage *settings()
-    {
-        return SettingsStorage::instance();
-    }
 
     bool isTorrentLink(const QString &str)
     {
@@ -146,10 +123,14 @@ namespace
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , m_ui(new Ui::MainWindow)
-    , m_posInitialized(false)
-    , m_forceExit(false)
-    , m_unlockDlgShowing(false)
-    , m_hasPython(false)
+    , m_storeExecutionLogEnabled(EXECUTIONLOG_SETTINGS_KEY("Enabled"))
+    , m_storeDownloadTrackerFavicon(SETTINGS_KEY("DownloadTrackerFavicon"))
+    , m_storeNotificationEnabled(NOTIFICATIONS_SETTINGS_KEY("Enabled"))
+    , m_storeNotificationTorrentAdded(NOTIFICATIONS_SETTINGS_KEY("TorrentAdded"))
+    , m_storeExecutionLogTypes(EXECUTIONLOG_SETTINGS_KEY("Types"), Log::MsgType::ALL)
+#if (defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)) && defined(QT_DBUS_LIB)
+    , m_storeNotificationTimeOut(NOTIFICATIONS_SETTINGS_KEY("Timeout"))
+#endif
 {
     m_ui->setupUi(this);
 
@@ -359,11 +340,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionSearchWidget->setChecked(pref->isSearchEnabled());
     m_ui->actionExecutionLogs->setChecked(isExecutionLogEnabled());
 
-    Log::MsgTypes flags(executionLogMsgTypes());
-    m_ui->actionNormalMessages->setChecked(flags & Log::NORMAL);
-    m_ui->actionInformationMessages->setChecked(flags & Log::INFO);
-    m_ui->actionWarningMessages->setChecked(flags & Log::WARNING);
-    m_ui->actionCriticalMessages->setChecked(flags & Log::CRITICAL);
+    const Log::MsgTypes flags = executionLogMsgTypes();
+    m_ui->actionNormalMessages->setChecked(flags.testFlag(Log::NORMAL));
+    m_ui->actionInformationMessages->setChecked(flags.testFlag(Log::INFO));
+    m_ui->actionWarningMessages->setChecked(flags.testFlag(Log::WARNING));
+    m_ui->actionCriticalMessages->setChecked(flags.testFlag(Log::CRITICAL));
 
     displayRSSTab(m_ui->actionRSSReader->isChecked());
     on_actionExecutionLogs_triggered(m_ui->actionExecutionLogs->isChecked());
@@ -416,7 +397,7 @@ MainWindow::MainWindow(QWidget *parent)
                 hide();
                 if (!pref->minimizeToTrayNotified())
                 {
-                    showNotificationBaloon(tr("qBittorrent is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
+                    showNotificationBalloon(tr("qBittorrent is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
                     pref->setMinimizeToTrayNotified(true);
                 }
             }
@@ -461,7 +442,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (!pref->neverCheckFileAssoc() && (!Preferences::isTorrentFileAssocSet() || !Preferences::isMagnetLinkAssocSet()))
     {
         if (QMessageBox::question(this, tr("Torrent file association"),
-                                  tr("qBittorrent is not the default application to open torrent files or Magnet links.\nDo you want to associate qBittorrent to torrent files and Magnet links?"),
+                                  tr("qBittorrent is not the default application for opening torrent files or Magnet links.\nDo you want to make qBittorrent the default application for these?"),
                                   QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
                                   {
             Preferences::setTorrentFileAssoc(true);
@@ -486,68 +467,66 @@ MainWindow::~MainWindow()
 
 bool MainWindow::isExecutionLogEnabled() const
 {
-    return settings()->loadValue(KEY_EXECUTIONLOG_ENABLED, false);
+    return m_storeExecutionLogEnabled;
 }
 
-void MainWindow::setExecutionLogEnabled(bool value)
+void MainWindow::setExecutionLogEnabled(const bool value)
 {
-    settings()->storeValue(KEY_EXECUTIONLOG_ENABLED, value);
+    m_storeExecutionLogEnabled = value;
 }
 
-int MainWindow::executionLogMsgTypes() const
+Log::MsgTypes MainWindow::executionLogMsgTypes() const
 {
-    // as default value we need all the bits set
-    // -1 is considered the portable way to achieve that
-    return settings()->loadValue(KEY_EXECUTIONLOG_TYPES, -1);
+    return m_storeExecutionLogTypes;
 }
 
-void MainWindow::setExecutionLogMsgTypes(const int value)
+void MainWindow::setExecutionLogMsgTypes(const Log::MsgTypes value)
 {
-    m_executionLog->setMessageTypes(static_cast<Log::MsgTypes>(value));
-    settings()->storeValue(KEY_EXECUTIONLOG_TYPES, value);
+    m_executionLog->setMessageTypes(value);
+    m_storeExecutionLogTypes = value;
 }
 
 bool MainWindow::isNotificationsEnabled() const
 {
-    return settings()->loadValue(KEY_NOTIFICATIONS_ENABLED, true);
+    return m_storeNotificationEnabled.get(true);
 }
 
 void MainWindow::setNotificationsEnabled(bool value)
 {
-    settings()->storeValue(KEY_NOTIFICATIONS_ENABLED, value);
+    m_storeNotificationEnabled = value;
 }
 
 bool MainWindow::isTorrentAddedNotificationsEnabled() const
 {
-    return settings()->loadValue(KEY_NOTIFICATIONS_TORRENTADDED, false);
+    return m_storeNotificationTorrentAdded;
 }
 
-void MainWindow::setTorrentAddedNotificationsEnabled(bool value)
+void MainWindow::setTorrentAddedNotificationsEnabled(const bool value)
 {
-    settings()->storeValue(KEY_NOTIFICATIONS_TORRENTADDED, value);
+    m_storeNotificationTorrentAdded = value;
 }
 
 #if (defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)) && defined(QT_DBUS_LIB)
 int MainWindow::getNotificationTimeout() const
 {
-    return settings()->loadValue(KEY_NOTIFICATION_TIMEOUT, -1);
+    return m_storeNotificationTimeOut.get(-1);
 }
 
 void MainWindow::setNotificationTimeout(const int value)
 {
-    settings()->storeValue(KEY_NOTIFICATION_TIMEOUT, value);
+    m_storeNotificationTimeOut = value;
 }
 #endif
 
 bool MainWindow::isDownloadTrackerFavicon() const
 {
-    return settings()->loadValue(KEY_DOWNLOAD_TRACKER_FAVICON, false);
+    return m_storeDownloadTrackerFavicon;
 }
 
-void MainWindow::setDownloadTrackerFavicon(bool value)
+void MainWindow::setDownloadTrackerFavicon(const bool value)
 {
     m_transferListFiltersWidget->setDownloadTrackerFavicon(value);
-    settings()->storeValue(KEY_DOWNLOAD_TRACKER_FAVICON, value);
+    m_storeDownloadTrackerFavicon = value;
 }
 
 void MainWindow::addToolbarContextMenu()
@@ -650,7 +629,7 @@ bool MainWindow::defineUILockPassword()
 
     if (newPassword.size() < 3)
     {
-        QMessageBox::warning(this, tr("Invalid password"), tr("The password should contain at least 3 characters"));
+        QMessageBox::warning(this, tr("Invalid password"), tr("The password must be at least 3 characters long"));
         return false;
     }
 
@@ -858,26 +837,26 @@ void MainWindow::balloonClicked()
 
 void MainWindow::addTorrentFailed(const QString &error) const
 {
-    showNotificationBaloon(tr("Error"), tr("Failed to add torrent: %1").arg(error));
+    showNotificationBalloon(tr("Error"), tr("Failed to add torrent: %1").arg(error));
 }
 
 // called when a torrent was added
 void MainWindow::torrentNew(BitTorrent::Torrent *const torrent) const
 {
     if (isTorrentAddedNotificationsEnabled())
-        showNotificationBaloon(tr("Torrent added"), tr("'%1' was added.", "e.g: xxx.avi was added.").arg(torrent->name()));
+        showNotificationBalloon(tr("Torrent added"), tr("'%1' was added.", "e.g: xxx.avi was added.").arg(torrent->name()));
 }
 
 // called when a torrent has finished
 void MainWindow::finishedTorrent(BitTorrent::Torrent *const torrent) const
 {
-    showNotificationBaloon(tr("Download completion"), tr("'%1' has finished downloading.", "e.g: xxx.avi has finished downloading.").arg(torrent->name()));
+    showNotificationBalloon(tr("Download completed"), tr("'%1' has finished downloading.", "e.g: xxx.avi has finished downloading.").arg(torrent->name()));
 }
 
 // Notification when disk is full
 void MainWindow::fullDiskError(BitTorrent::Torrent *const torrent, const QString &msg) const
 {
-    showNotificationBaloon(tr("I/O Error", "i.e: Input/Output Error")
+    showNotificationBalloon(tr("I/O Error", "i.e: Input/Output Error")
         , tr("An I/O error occurred for torrent '%1'.\n Reason: %2"
             , "e.g: An error occurred for torrent 'xxx.avi'.\n Reason: disk is full.").arg(torrent->name(), msg));
 }
@@ -994,7 +973,7 @@ void MainWindow::askRecursiveTorrentDownloadConfirmation(BitTorrent::Torrent *co
 void MainWindow::handleDownloadFromUrlFailure(const QString &url, const QString &reason) const
 {
     // Display a message box
-    showNotificationBaloon(tr("URL download error")
+    showNotificationBalloon(tr("URL download error")
         , tr("Couldn't download file at URL '%1', reason: %2.").arg(url, reason));
 }
 
@@ -1131,17 +1110,26 @@ void MainWindow::on_actionStatistics_triggered()
 void MainWindow::showEvent(QShowEvent *e)
 {
     qDebug("** Show Event **");
-
-    if (currentTabWidget() == m_transferListWidget)
-        m_propertiesWidget->loadDynamicData();
-
     e->accept();
 
-    // Make sure the window is initially centered
-    if (!m_posInitialized)
+    if (isVisible())
     {
-        move(Utils::Gui::screenCenter(this));
-        m_posInitialized = true;
+        // preparations before showing the window
+
+        if (currentTabWidget() == m_transferListWidget)
+            m_propertiesWidget->loadDynamicData();
+
+        // Make sure the window is initially centered
+        if (!m_posInitialized)
+        {
+            move(Utils::Gui::screenCenter(this));
+            m_posInitialized = true;
+        }
+    }
+    else
+    {
+        // to avoid blank screen when restoring from tray icon
+        show();
     }
 }
 
@@ -1154,7 +1142,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if (mimeData->hasText())
         {
             const bool useTorrentAdditionDialog {AddNewTorrentDialog::isEnabled()};
-            const QStringList lines {mimeData->text().split('\n', QString::SkipEmptyParts)};
+            const QStringList lines {mimeData->text().split('\n', Qt::SkipEmptyParts)};
 
             for (QString line : lines)
             {
@@ -1195,7 +1183,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
         QTimer::singleShot(0, this, &QWidget::hide);
         if (!pref->closeToTrayNotified())
         {
-            showNotificationBaloon(tr("qBittorrent is closed to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
+            showNotificationBalloon(tr("qBittorrent is closed to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
             pref->setCloseToTrayNotified(true);
         }
         return;
@@ -1295,7 +1283,7 @@ bool MainWindow::event(QEvent *e)
                     QTimer::singleShot(0, this, &QWidget::hide);
                     if (!pref->minimizeToTrayNotified())
                     {
-                        showNotificationBaloon(tr("qBittorrent is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
+                        showNotificationBalloon(tr("qBittorrent is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
                         pref->setMinimizeToTrayNotified(true);
                     }
                     return true;
@@ -1460,6 +1448,7 @@ void MainWindow::activate()
 
 void MainWindow::optionsSaved()
 {
+    Logger::instance()->addMessage(tr("Options saved."));
     loadPreferences();
 }
 
@@ -1482,7 +1471,6 @@ void MainWindow::showStatusBar(bool show)
 
 void MainWindow::loadPreferences(const bool configureSession)
 {
-    Logger::instance()->addMessage(tr("Options were saved successfully."));
     const Preferences *const pref = Preferences::instance();
 #ifdef Q_OS_MACOS
     Q_UNUSED(configureSession);
@@ -1658,7 +1646,7 @@ void MainWindow::reloadTorrentStats(const QVector<BitTorrent::Torrent *> &torren
     }
 }
 
-void MainWindow::showNotificationBaloon(const QString &title, const QString &msg) const
+void MainWindow::showNotificationBalloon(const QString &title, const QString &msg) const
 {
     if (!isNotificationsEnabled())
         return;
@@ -1878,15 +1866,15 @@ void MainWindow::on_actionSearchWidget_triggered()
 
 #ifdef Q_OS_WIN
             const QMessageBox::StandardButton buttonPressed = QMessageBox::question(this, tr("Old Python Runtime")
-                , tr("Your Python version (%1) is outdated. Minimum requirement: 3.5.0.\nDo you want to install a newer version now?")
-                    .arg(pyInfo.version)
+                , tr("Your Python version (%1) is outdated. Minimum requirement: %2.\nDo you want to install a newer version now?")
+                    .arg(pyInfo.version, QLatin1String("3.5.0"))
                 , (QMessageBox::Yes | QMessageBox::No), QMessageBox::Yes);
             if (buttonPressed == QMessageBox::Yes)
                 installPython();
 #else
             QMessageBox::information(this, tr("Old Python Runtime")
-                , tr("Your Python version (%1) is outdated. Please upgrade to latest version for search engines to work.\nMinimum requirement: 3.3.0.")
-                .arg(pyInfo.version));
+                , tr("Your Python version (%1) is outdated. Please upgrade to latest version for search engines to work.\nMinimum requirement: %2.")
+                .arg(pyInfo.version, QLatin1String("3.5.0")));
 #endif
             return;
         }
@@ -1997,7 +1985,7 @@ void MainWindow::on_actionExecutionLogs_triggered(bool checked)
     if (checked)
     {
         Q_ASSERT(!m_executionLog);
-        m_executionLog = new ExecutionLogWidget(static_cast<Log::MsgType>(executionLogMsgTypes()), m_tabs);
+        m_executionLog = new ExecutionLogWidget(executionLogMsgTypes(), m_tabs);
 #ifdef Q_OS_MACOS
         m_tabs->addTab(m_executionLog, tr("Execution Log"));
 #else
@@ -2017,43 +2005,39 @@ void MainWindow::on_actionExecutionLogs_triggered(bool checked)
     setExecutionLogEnabled(checked);
 }
 
-void MainWindow::on_actionNormalMessages_triggered(bool checked)
+void MainWindow::on_actionNormalMessages_triggered(const bool checked)
 {
     if (!m_executionLog)
         return;
 
-    Log::MsgTypes flags(executionLogMsgTypes());
-    checked ? (flags |= Log::NORMAL) : (flags &= ~Log::NORMAL);
+    const Log::MsgTypes flags = executionLogMsgTypes().setFlag(Log::NORMAL, checked);
     setExecutionLogMsgTypes(flags);
 }
 
-void MainWindow::on_actionInformationMessages_triggered(bool checked)
+void MainWindow::on_actionInformationMessages_triggered(const bool checked)
 {
     if (!m_executionLog)
         return;
 
-    Log::MsgTypes flags(executionLogMsgTypes());
-    checked ? (flags |= Log::INFO) : (flags &= ~Log::INFO);
+    const Log::MsgTypes flags = executionLogMsgTypes().setFlag(Log::INFO, checked);
     setExecutionLogMsgTypes(flags);
 }
 
-void MainWindow::on_actionWarningMessages_triggered(bool checked)
+void MainWindow::on_actionWarningMessages_triggered(const bool checked)
 {
     if (!m_executionLog)
         return;
 
-    Log::MsgTypes flags(executionLogMsgTypes());
-    checked ? (flags |= Log::WARNING) : (flags &= ~Log::WARNING);
+    const Log::MsgTypes flags = executionLogMsgTypes().setFlag(Log::WARNING, checked);
     setExecutionLogMsgTypes(flags);
 }
 
-void MainWindow::on_actionCriticalMessages_triggered(bool checked)
+void MainWindow::on_actionCriticalMessages_triggered(const bool checked)
 {
     if (!m_executionLog)
         return;
 
-    Log::MsgTypes flags(executionLogMsgTypes());
-    checked ? (flags |= Log::CRITICAL) : (flags &= ~Log::CRITICAL);
+    const Log::MsgTypes flags = executionLogMsgTypes().setFlag(Log::CRITICAL, checked);
     setExecutionLogMsgTypes(flags);
 }
 
@@ -2150,9 +2134,9 @@ void MainWindow::installPython()
     setCursor(QCursor(Qt::WaitCursor));
     // Download python
 #ifdef QBT_APP_64BIT
-    const QString installerURL = "https://www.python.org/ftp/python/3.8.5/python-3.8.5-amd64.exe";
+    const QString installerURL = "https://www.python.org/ftp/python/3.8.10/python-3.8.10-amd64.exe";
 #else
-    const QString installerURL = "https://www.python.org/ftp/python/3.8.5/python-3.8.5.exe";
+    const QString installerURL = "https://www.python.org/ftp/python/3.8.10/python-3.8.10.exe";
 #endif
     Net::DownloadManager::instance()->download(
                 Net::DownloadRequest(installerURL).saveToFile(true)
@@ -2175,8 +2159,9 @@ void MainWindow::pythonDownloadFinished(const Net::DownloadResult &result)
     QProcess installer;
     qDebug("Launching Python installer in passive mode...");
 
-    QFile::rename(result.filePath, result.filePath + ".exe");
-    installer.start('"' + Utils::Fs::toNativePath(result.filePath) + ".exe\" /passive");
+    const QString exePath = result.filePath + QLatin1String(".exe");
+    QFile::rename(result.filePath, exePath);
+    installer.start(Utils::Fs::toNativePath(exePath), {"/passive"});
 
     // Wait for setup to complete
     installer.waitForFinished(10 * 60 * 1000);
@@ -2186,7 +2171,7 @@ void MainWindow::pythonDownloadFinished(const Net::DownloadResult &result)
     qDebug("Setup should be complete!");
 
     // Delete temp file
-    Utils::Fs::forceRemove(result.filePath + ".exe");
+    Utils::Fs::forceRemove(exePath);
 
     // Reload search engine
     if (Utils::ForeignApps::pythonInfo().isSupportedVersion())

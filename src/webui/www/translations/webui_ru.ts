@@ -160,10 +160,6 @@
         <translation>Ограничение времени раздачи должно быть в диапазоне от 0 до 525600 минут.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Порт для входящих соединений должен принимать значения от 1 до 65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>Порт для для веб-интерфейса должен принимать значения от 1 до 65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Авторы</translation>
+        <translation type="vanished">Авторы</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Куки (cookie):</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Укажите папку здесь</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Переименовать торрент</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Другой…</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>ОК</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>Порт для входящих соединений должен принимать значения от 0 до 65535.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -605,7 +600,7 @@
     </message>
     <message>
         <source>BitTorrent</source>
-        <translation>BitTorrent</translation>
+        <translation>БитТоррент</translation>
     </message>
     <message>
         <source>Web UI</source>
@@ -730,10 +725,6 @@
     <message>
         <source>Use UPnP / NAT-PMP port forwarding from my router</source>
         <translation>Использовать UPnP / NAT-PMP для проброса портов через мой роутер</translation>
-    </message>
-    <message>
-        <source>Use different port on each startup</source>
-        <translation>Использовать случайный порт при запуске</translation>
     </message>
     <message>
         <source>Connections Limits</source>
@@ -970,10 +961,6 @@
         <translation>%T: Текущий трекер</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: Хеш-сумма</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Подсказка: Включите параметр в кавычки для защиты от обрезки на пробелах (напр. "%N")</translation>
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>IP для сообщения трекерам (требуется перезапуск):</translation>
+        <translation type="vanished">IP для сообщения трекерам (требуется перезапуск):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1295,7 +1282,7 @@
     </message>
     <message>
         <source>Session timeout:</source>
-        <translation>Перерыв в сеансе:</translation>
+        <translation>Тайм-аут сеанса:</translation>
     </message>
     <message>
         <source>Resolve peer countries:</source>
@@ -1407,7 +1394,7 @@
     </message>
     <message>
         <source>Disallow connection to peers on privileged ports:</source>
-        <translation>Не подключаться к пирам по привилегированным портам:</translation>
+        <translation>Не подключаться к пирам по общеизвестным портам:</translation>
     </message>
     <message>
         <source>Enable auto downloading of RSS torrents</source>
@@ -1435,7 +1422,7 @@
     </message>
     <message>
         <source>Support internationalized domain name (IDN) (requires libtorrent &gt;= 1.2.12):</source>
-        <translation>Поддержка интернационализованных доменных имён (IDN) (требуется libtorrent &gt;= 1.2.12):</translation>
+        <translation>Поддерживать нелатинские имена доменов (IDN) (требуется libtorrent &gt;= 1.2.12):</translation>
     </message>
     <message>
         <source>Torrent content layout:</source>
@@ -1456,6 +1443,50 @@
     <message>
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Тип обслуживания (ToS) соединений к пирам</translation>
+    </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Исходящие соединения в секунду:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Случайный</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: ID торрента</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>Переанонсировать на все трекеры, если IP или порт сменились:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Список доверенных прокси-серверов:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Включить поддержку обратного прокси-сервера</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: Инфо-хеш v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: Хеш-хеш v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1686,10 +1717,6 @@
         <translation>Дата создания:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Хеш торрента:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Путь сохранения:</translation>
     </message>
@@ -1745,6 +1772,22 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (раздаётся %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Инфо-хеш v2:</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Инфо-хеш v1:</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>Н/Д</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1766,11 +1809,11 @@
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Другое…</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Укажите папку здесь</translation>
     </message>
 </context>
 <context>
@@ -1953,6 +1996,14 @@
         <source>Stalled (%1)</source>
         <translation>Простаивают (%1)</translation>
     </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>Проверяются (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>Проверяется (0)</translation>
+    </message>
 </context>
 <context>
     <name>TorrentContentModel</name>
@@ -2126,7 +2177,7 @@
     </message>
     <message>
         <source>Downloaded</source>
-        <translation>Загружено</translation>
+        <translation>Загрузки</translation>
     </message>
     <message>
         <source>Tracker URL:</source>
@@ -2166,11 +2217,11 @@
     </message>
     <message>
         <source>Add a new tracker...</source>
-        <translation>Добавить новый трекер...</translation>
+        <translation>Добавить новый трекер…</translation>
     </message>
     <message>
         <source>Edit tracker URL...</source>
-        <translation>Изменить адрес трекера...</translation>
+        <translation>Изменить адрес трекера…</translation>
     </message>
     <message>
         <source>Tracker editing</source>
@@ -2294,6 +2345,10 @@
     <message>
         <source>%1 (seeded for %2)</source>
         <translation>%1 (раздаётся %2)</translation>
+    </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[П] Получение метаданных</translation>
     </message>
 </context>
 <context>
@@ -2472,10 +2527,6 @@
         <translation>Магнет-ссылку</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Хеш</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Удалить все</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Добавить…</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>Инфо-хеш v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>Инфо-хеш v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>ID торрента</translation>
     </message>
 </context>
 <context>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Результаты (показано</translation>
+        <translation type="vanished">Результаты (показано</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Увеличить ширину окна, чтобы отобразить дополнительные фильтры</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>до</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2923,7 +2998,7 @@
     </message>
     <message>
         <source>An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar.</source>
-        <translation>Продвинутый клиент сети BitTorrent, написанный на языке C++ с использованием фреймворка Qt и библиотеки libtorrent-rasterbar.</translation>
+        <translation>Продвинутый клиент сети БитТоррент, написанный на языке C++ с использованием фреймворка Qt и библиотеки libtorrent-rasterbar.</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>Авторы</translation>
+        <translation type="vanished">Авторы</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>Бесплатная база данных IP to Country Lite от DB-IP используется для разрешения стран пиров. База данных лицензирована по международной лицензии Creative Commons Attribution 4.0</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3387,6 +3470,10 @@ Supports the formats: S01E01, 1x1, 2017.12.31 and 31.12.2017 (Date formats also 
     <message>
         <source>RSS feeds</source>
         <translation>RSS-каналы</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>Непрочитанные</translation>
     </message>
 </context>
 </TS>

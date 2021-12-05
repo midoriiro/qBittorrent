@@ -176,7 +176,7 @@ namespace
         const QJsonObject dht
         {
             {KEY_TRACKER_URL, "** [DHT] **"},
-            {KEY_TRACKER_TIER, ""},
+            {KEY_TRACKER_TIER, -1},
             {KEY_TRACKER_MSG, (isTorrentPrivate ? privateMsg : "")},
             {KEY_TRACKER_STATUS, ((BitTorrent::Session::instance()->isDHTEnabled() && !isTorrentPrivate) ? working : disabled)},
             {KEY_TRACKER_PEERS_COUNT, 0},
@@ -188,7 +188,7 @@ namespace
         const QJsonObject pex
         {
             {KEY_TRACKER_URL, "** [PeX] **"},
-            {KEY_TRACKER_TIER, ""},
+            {KEY_TRACKER_TIER, -1},
             {KEY_TRACKER_MSG, (isTorrentPrivate ? privateMsg : "")},
             {KEY_TRACKER_STATUS, ((BitTorrent::Session::instance()->isPeXEnabled() && !isTorrentPrivate) ? working : disabled)},
             {KEY_TRACKER_PEERS_COUNT, 0},
@@ -200,7 +200,7 @@ namespace
         const QJsonObject lsd
         {
             {KEY_TRACKER_URL, "** [LSD] **"},
-            {KEY_TRACKER_TIER, ""},
+            {KEY_TRACKER_TIER, -1},
             {KEY_TRACKER_MSG, (isTorrentPrivate ? privateMsg : "")},
             {KEY_TRACKER_STATUS, ((BitTorrent::Session::instance()->isLSDEnabled() && !isTorrentPrivate) ? working : disabled)},
             {KEY_TRACKER_PEERS_COUNT, 0},
@@ -246,6 +246,7 @@ namespace
 // GET params:
 //   - filter (string): all, downloading, seeding, completed, paused, resumed, active, inactive, stalled, stalled_uploading, stalled_downloading
 //   - category (string): torrent category for filtering by it (empty string means "uncategorized"; no "category" param presented means "any category")
+//   - tag (string): torrent tag for filtering by it (empty string means "untagged"; no "tag" param presented means "any tag")
 //   - hashes (string): filter by hashes, can contain multiple hashes separated by |
 //   - sort (string): name of column for sorting by its value
 //   - reverse (bool): enable reverse sorting
@@ -255,17 +256,18 @@ void TorrentsController::infoAction()
 {
     const QString filter {params()["filter"]};
     const QString category {params()["category"]};
+    const QString tag {params()["tag"]};
     const QString sortedColumn {params()["sort"]};
     const bool reverse {parseBool(params()["reverse"]).value_or(false)};
     int limit {params()["limit"].toInt()};
     int offset {params()["offset"].toInt()};
-    const QStringList hashes {params()["hashes"].split('|', QString::SkipEmptyParts)};
+    const QStringList hashes {params()["hashes"].split('|', Qt::SkipEmptyParts)};
 
     TorrentIDSet idSet;
     for (const QString &hash : hashes)
         idSet.insert(BitTorrent::TorrentID::fromString(hash));
 
-    const TorrentFilter torrentFilter(filter, (hashes.isEmpty() ? TorrentFilter::AnyID : idSet), category);
+    const TorrentFilter torrentFilter(filter, (hashes.isEmpty() ? TorrentFilter::AnyID : idSet), category, tag);
     QVariantList torrentList;
     for (const BitTorrent::Torrent *torrent : asConst(BitTorrent::Session::instance()->torrents()))
     {
@@ -382,6 +384,8 @@ void TorrentsController::propertiesAction()
 
     QJsonObject dataDict;
 
+    dataDict[KEY_TORRENT_INFOHASHV1] = torrent->infoHash().v1().toString();
+    dataDict[KEY_TORRENT_INFOHASHV2] = torrent->infoHash().v2().toString();
     dataDict[KEY_PROP_TIME_ELAPSED] = torrent->activeTime();
     dataDict[KEY_PROP_SEEDING_TIME] = torrent->seedingTime();
     dataDict[KEY_PROP_ETA] = static_cast<double>(torrent->eta());
@@ -637,7 +641,7 @@ void TorrentsController::addAction()
     const std::optional<bool> addPaused = parseBool(params()["paused"]);
     const QString savepath = params()["savepath"].trimmed();
     const QString category = params()["category"];
-    const QStringList tags = params()["tags"].split(',', QString::SkipEmptyParts);
+    const QStringList tags = params()["tags"].split(',', Qt::SkipEmptyParts);
     const QString torrentName = params()["rename"].trimmed();
     const int upLimit = parseInt(params()["upLimit"]).value_or(-1);
     const int dlLimit = parseInt(params()["dlLimit"]).value_or(-1);
@@ -697,14 +701,14 @@ void TorrentsController::addAction()
 
     for (auto it = data().constBegin(); it != data().constEnd(); ++it)
     {
-        const BitTorrent::TorrentInfo torrentInfo = BitTorrent::TorrentInfo::load(it.value());
-        if (!torrentInfo.isValid())
+        const nonstd::expected<BitTorrent::TorrentInfo, QString> result = BitTorrent::TorrentInfo::load(it.value());
+        if (!result)
         {
             throw APIError(APIErrorType::BadData
                            , tr("Error: '%1' is not a valid torrent file.").arg(it.key()));
         }
 
-        partialSuccess |= BitTorrent::Session::instance()->addTorrent(torrentInfo, addTorrentParams);
+        partialSuccess |= BitTorrent::Session::instance()->addTorrent(result.value(), addTorrentParams);
     }
 
     if (partialSuccess)
@@ -1215,7 +1219,7 @@ void TorrentsController::addTagsAction()
     requireParams({"hashes", "tags"});
 
     const QStringList hashes {params()["hashes"].split('|')};
-    const QStringList tags {params()["tags"].split(',', QString::SkipEmptyParts)};
+    const QStringList tags {params()["tags"].split(',', Qt::SkipEmptyParts)};
 
     for (const QString &tag : tags)
     {
@@ -1232,7 +1236,7 @@ void TorrentsController::removeTagsAction()
     requireParams({"hashes"});
 
     const QStringList hashes {params()["hashes"].split('|')};
-    const QStringList tags {params()["tags"].split(',', QString::SkipEmptyParts)};
+    const QStringList tags {params()["tags"].split(',', Qt::SkipEmptyParts)};
 
     for (const QString &tag : tags)
     {
@@ -1256,7 +1260,7 @@ void TorrentsController::createTagsAction()
 {
     requireParams({"tags"});
 
-    const QStringList tags {params()["tags"].split(',', QString::SkipEmptyParts)};
+    const QStringList tags {params()["tags"].split(',', Qt::SkipEmptyParts)};
 
     for (const QString &tag : tags)
         BitTorrent::Session::instance()->addTag(tag.trimmed());
@@ -1266,7 +1270,7 @@ void TorrentsController::deleteTagsAction()
 {
     requireParams({"tags"});
 
-    const QStringList tags {params()["tags"].split(',', QString::SkipEmptyParts)};
+    const QStringList tags {params()["tags"].split(',', Qt::SkipEmptyParts)};
     for (const QString &tag : tags)
         BitTorrent::Session::instance()->removeTag(tag.trimmed());
 }

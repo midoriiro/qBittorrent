@@ -184,9 +184,8 @@ SettingsStorage *SettingsStorage::instance()
 
 bool SettingsStorage::save()
 {
-    if (!m_dirty) return true; // Obtaining the lock is expensive, let's check early
-    const QWriteLocker locker(&m_lock);  // to guard for `m_dirty`
-    if (!m_dirty) return true; // something might have changed while we were getting the lock
+    const QWriteLocker locker(&m_lock);  // guard for `m_dirty` too
+    if (!m_dirty) return true;
 
     const TransactionalSettings settings(QLatin1String("qBittorrent"));
     if (!settings.write(m_data))
@@ -233,6 +232,13 @@ void SettingsStorage::removeValue(const QString &key)
         m_dirty = true;
         m_timer.start();
     }
+}
+
+bool SettingsStorage::hasKey(const QString &key) const
+{
+    const QString realKey = mapKey(key);
+    const QReadLocker locker {&m_lock};
+    return m_data.contains(realKey);
 }
 
 QVariantHash TransactionalSettings::read() const

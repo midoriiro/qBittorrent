@@ -160,10 +160,6 @@
         <translation>Le temps de partage doit être compris entre 0 et 525600 minutes.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Le port utilisé pour les connexions entrantes doit être compris entre 1 et 65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>Le port utilisé pour l'interface Web doit être compris entre 1024 et 65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Auteurs originaux</translation>
+        <translation type="vanished">Auteurs originaux</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Cookie :</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Entrez le dossier ici</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Renommer le torrent</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Autre...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>Le port utilisé pour les connexions entrantes doit être compris entre 0 et 65535.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -732,10 +727,6 @@
         <translation>Utiliser la redirection de port sur mon routeur via UPnP / NAT-PMP</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Utiliser un port différent à chaque démarrage</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Limites de connexions</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T : Tracker actuel</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I : Hachage d'information</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Encapsuler le paramètre entre guillemets pour éviter que le texte soit coupé en espace blanc (ex., "%N")</translation>
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>Adresse IP annoncée aux trackers (Redémarrage requis)</translation>
+        <translation type="vanished">Adresse IP annoncée aux trackers (Redémarrage requis)</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1457,6 +1444,50 @@
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Type de service (ToS) pour les connexions aux pairs</translation>
     </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Connexions sortantes par seconde :</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Aléatoire</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K : ID du torrent</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>Annoncer à nouveau à tous les trackers lorsque l'IP ou le port a changé :</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Liste des proxys de confiance :</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Activer la prise en charge du reverse proxy</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J : Info hash v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I : Info hash v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>PeerListWidget</name>
@@ -1686,10 +1717,6 @@
         <translation>Créé le :</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Hachage du torrent :</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Chemin de sauvegarde :</translation>
     </message>
@@ -1745,6 +1772,22 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (partagé pendant %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Info hash v2 :</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Info hash v1 :</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/D</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1766,11 +1809,11 @@
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Autre...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Entrez le dossier ici</translation>
     </message>
 </context>
 <context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>Arrêté (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>En cours de vérification (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>En cours de vérification (0)</translation>
     </message>
 </context>
 <context>
@@ -2295,6 +2346,10 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (partagé pendant %2)</translation>
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[F] Téléchargement des métadonnées</translation>
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2472,10 +2527,6 @@
         <translation>Lien magnet</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Hash</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Tout supprimer</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Ajouter...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>Info hash v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>Info hash v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>ID du torrent</translation>
     </message>
 </context>
 <context>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Résultats</translation>
+        <translation type="vanished">Résultats</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Agrandir la largeur de la fenêtre pour afficher plus de filtres</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>vers</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>Auteur</translation>
+        <translation type="vanished">Auteur</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>La base de données libre IP to Country Lite de DB-IP est utilisée pour déterminer les pays des pairs. La base de données est sous licence Creative Commons Attribution 4.0 International License</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3387,6 +3470,10 @@ Les formats supportés : S01E01, 1x1, 2017.12.31 et 31.12.2017 (les formats date
     <message>
         <source>RSS feeds</source>
         <translation>Flux RSS</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>Non lu</translation>
     </message>
 </context>
 </TS>

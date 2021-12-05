@@ -29,10 +29,11 @@
 #pragma once
 
 #include <array>
-#include <stdexcept>
 
 #include <QDebug>
 #include <QString>
+
+#include "base/exceptions.h"
 
 namespace Utils
 {
@@ -47,12 +48,7 @@ namespace Utils
         typedef T ComponentType;
         typedef Version<T, N, Mandatory> ThisType;
 
-        constexpr Version()
-            : m_components {{}}
-        {
-        }
-
-        constexpr Version(const ThisType &other) = default;
+        constexpr Version() = default;
 
         template <typename ... Other>
         constexpr Version(Other ... components)
@@ -64,7 +60,7 @@ namespace Utils
          * @brief Creates version from string in format "x.y.z"
          *
          * @param version Version string in format "x.y.z"
-         * @throws std::runtime_error if parsing fails
+         * @throws RuntimeError if parsing fails
          */
         Version(const QString &version)
             : Version {version.split(QLatin1Char('.'))}
@@ -75,7 +71,7 @@ namespace Utils
          * @brief Creates version from byte array in format "x.y.z"
          *
          * @param version Version string in format "x.y.z"
-         * @throws std::runtime_error if parsing fails
+         * @throws RuntimeError if parsing fails
          */
         Version(const QByteArray &version)
             : Version {version.split('.')}
@@ -150,9 +146,9 @@ namespace Utils
             {
                 return Version(s);
             }
-            catch (const std::runtime_error &er)
+            catch (const RuntimeError &er)
             {
-                qDebug() << "Error parsing version:" << er.what();
+                qDebug() << "Error parsing version:" << er.message();
                 return defaultVersion;
             }
         }
@@ -165,7 +161,9 @@ namespace Utils
         {
             if ((static_cast<std::size_t>(versionParts.size()) > N)
                 || (static_cast<std::size_t>(versionParts.size()) < Mandatory))
-                throw std::runtime_error("Incorrect number of version components");
+            {
+                throw RuntimeError(QLatin1String("Incorrect number of version components"));
+            }
 
             bool ok = false;
             ComponentsArray res {{}};
@@ -173,7 +171,7 @@ namespace Utils
             {
                 res[i] = static_cast<T>(versionParts[static_cast<typename StringsList::size_type>(i)].toInt(&ok));
                 if (!ok)
-                    throw std::runtime_error("Can not parse version component");
+                    throw RuntimeError(QLatin1String("Can not parse version component"));
             }
             return res;
         }
@@ -184,7 +182,7 @@ namespace Utils
         {
         }
 
-        ComponentsArray m_components;
+        ComponentsArray m_components {{}};
     };
 
     template <typename T, std::size_t N, std::size_t Mandatory>

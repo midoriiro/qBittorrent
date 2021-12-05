@@ -28,8 +28,6 @@
 
 #pragma once
 
-#include <libtorrent/version.hpp>
-
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLineEdit>
@@ -50,7 +48,7 @@ signals:
     void settingsChanged();
 
 private slots:
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
     void updateCacheSpinSuffix(int value);
 #endif
     void updateSaveResumeDataIntervalSuffix(int value);
@@ -63,18 +61,18 @@ private:
     QSpinBox m_spinBoxAsyncIOThreads, m_spinBoxFilePoolSize, m_spinBoxCheckingMemUsage,
              m_spinBoxSaveResumeDataInterval, m_spinBoxOutgoingPortsMin, m_spinBoxOutgoingPortsMax, m_spinBoxUPnPLeaseDuration, m_spinBoxPeerToS,
              m_spinBoxListRefresh, m_spinBoxTrackerPort, m_spinBoxSendBufferWatermark, m_spinBoxSendBufferLowWatermark,
-             m_spinBoxSendBufferWatermarkFactor, m_spinBoxSocketBacklogSize, m_spinBoxMaxConcurrentHTTPAnnounces, m_spinBoxStopTrackerTimeout,
+             m_spinBoxSendBufferWatermarkFactor, m_spinBoxConnectionSpeed, m_spinBoxSocketBacklogSize, m_spinBoxMaxConcurrentHTTPAnnounces, m_spinBoxStopTrackerTimeout,
              m_spinBoxSavePathHistoryLength, m_spinBoxPeerTurnover, m_spinBoxPeerTurnoverCutoff, m_spinBoxPeerTurnoverInterval;
     QCheckBox m_checkBoxOsCache, m_checkBoxRecheckCompleted, m_checkBoxResolveCountries, m_checkBoxResolveHosts,
-              m_checkBoxProgramNotifications, m_checkBoxTorrentAddedNotifications, m_checkBoxTrackerFavicon, m_checkBoxTrackerStatus,
+              m_checkBoxProgramNotifications, m_checkBoxTorrentAddedNotifications, m_checkBoxReannounceWhenAddressChanged, m_checkBoxTrackerFavicon, m_checkBoxTrackerStatus,
               m_checkBoxConfirmTorrentRecheck, m_checkBoxConfirmRemoveAllTags, m_checkBoxAnnounceAllTrackers, m_checkBoxAnnounceAllTiers,
-              m_checkBoxMultiConnectionsPerIp, m_checkBoxValidateHTTPSTrackerCertificate, m_checkBoxBlockPeersOnPrivilegedPorts, m_checkBoxPieceExtentAffinity,
+              m_checkBoxMultiConnectionsPerIp, m_checkBoxValidateHTTPSTrackerCertificate, m_checkBoxSSRFMitigation, m_checkBoxBlockPeersOnPrivilegedPorts, m_checkBoxPieceExtentAffinity,
               m_checkBoxSuggestMode, m_checkBoxSpeedWidgetEnabled, m_checkBoxIDNSupport;
     QComboBox m_comboBoxInterface, m_comboBoxInterfaceAddress, m_comboBoxUtpMixedMode, m_comboBoxChokingAlgorithm,
               m_comboBoxSeedChokingAlgorithm, m_comboBoxResumeDataStorage;
     QLineEdit m_lineEditAnnounceIP;
 
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
     QSpinBox m_spinBoxCache, m_spinBoxCacheTTL;
     QCheckBox m_checkBoxCoalesceRW;
 #else

@@ -160,10 +160,6 @@
         <translation>A megosztási időkorlát 0 és 525600 perc között kell legyen.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Bejövő kapcsolatokhoz használt portnak 1024 és 65535 közé kell esnie.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>Web UI-hoz használt portnak 1024 és 65535 közé kell esnie.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Eredeti szerzők - fejlesztők</translation>
+        <translation type="vanished">Eredeti szerzők - fejlesztők</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Süti:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Ide írja be a könyvtár nevét </translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Torrent átnevezése</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Egyéb...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>A bejövő kapcsolatokhoz használt portnak 0 és 65535 között kell lennie. </translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -732,10 +727,6 @@
         <translation>UPnP / NAT-PMP használata a portok átirányítására</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Különböző port használata minden indításnál</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Kapcsolati korlátok</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T: Jelenlegi követő</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: Hash információ</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Tipp: Tegye a paramétereket idézőjelbe, hogy elkerülje azt, hogy az üres karaktereknél kettévágásra kerüljenek (például "%N")</translation>
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>Trackernek lejelentett IP cím (újraindítást igényel):</translation>
+        <translation type="vanished">Trackernek lejelentett IP cím (újraindítást igényel):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1343,7 +1330,7 @@
     </message>
     <message>
         <source>Hashing threads (requires libtorrent &gt;= 2.0):</source>
-        <translation>Hash szálak (szükséges libtorrent &gt;=2.0):</translation>
+        <translation>Ellenőrző szálak (szükséges libtorrent &gt;=2.0):</translation>
     </message>
     <message>
         <source>Coalesce reads &amp; writes (requires libtorrent &lt; 2.0):</source>
@@ -1456,6 +1443,50 @@
     <message>
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Szolgáltatástípus (ToS) az ügyfelekkel való kapcsolatokhoz</translation>
+    </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Másodpercenkénti kimenő kapcsolatok:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Véletlenszerű</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: Torrent azonosító</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>Újrajelentés az összes tracker felé ha változik az IP vagy port:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Megbízható proxyk listája:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Engedélyezze a fordított proxy támogatását</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: Információ-ujjlenyomat v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: Információ-ujjlenyomat v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1686,10 +1717,6 @@
         <translation>Készítés ideje:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Torrent hash:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Mentés útvonala:</translation>
     </message>
@@ -1745,6 +1772,22 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (megosztva %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Információ-ujjlenyomat v2:</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Információ-ujjlenyomat v1:</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>Nincs adat</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1766,11 +1809,11 @@
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Egyéb...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Írja ide a könyvtár nevét </translation>
     </message>
 </context>
 <context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>Elakadt (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>Ellenőrzés (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>Ellenőrzés (0)</translation>
     </message>
 </context>
 <context>
@@ -2295,6 +2346,10 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (megosztva %2)</translation>
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[F] Metaadatok letöltése</translation>
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2472,10 +2527,6 @@
         <translation>Magnet link</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Hash</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Összes eltávolítása</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Hozzáadás…</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>Információ-ujjlenyomat v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>Információ-ujjlenyomat v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>Torrent azonosító</translation>
     </message>
 </context>
 <context>
@@ -2545,7 +2608,7 @@
     <name>downloadFromURL</name>
     <message>
         <source>Download from URLs</source>
-        <translation>Letöltés URL-ekről</translation>
+        <translation>Letöltés URL-ekből</translation>
     </message>
     <message>
         <source>Download</source>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Találatok:</translation>
+        <translation type="vanished">Találatok:</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Növelje az ablak szélességét további szűrők megjelenítéséhez</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>eddig</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>Szerző</translation>
+        <translation type="vanished">Szerző</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>A DB-IP ingyenes IP to Country Lite adatbázisát a partnerek országának meghatározására használjuk. Az adatbázis Creative Commons Nevezd meg! 4.0 nemzetközi licenc alatt érhető el.</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3387,6 +3470,10 @@ Támogatja a formátumokat: S01E01, 1x1, 2017.12.31 és 31.12.2017. (A dátumfor
     <message>
         <source>RSS feeds</source>
         <translation>RSS források</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>Olvasatlan</translation>
     </message>
 </context>
 </TS>

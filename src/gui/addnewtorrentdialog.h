@@ -59,7 +59,7 @@ class TorrentFileGuard;
 class AddNewTorrentDialog final : public QDialog
 {
     Q_OBJECT
-    Q_DISABLE_COPY(AddNewTorrentDialog)
+    Q_DISABLE_COPY_MOVE(AddNewTorrentDialog)
 
 public:
     static const int minPathHistoryLength = 0;
@@ -82,7 +82,7 @@ private slots:
     void updateDiskSpaceLabel();
     void onSavePathChanged(const QString &newPath);
     void updateMetadata(const BitTorrent::TorrentInfo &metadata);
-    void handleDownloadFinished(const Net::DownloadResult &result);
+    void handleDownloadFinished(const Net::DownloadResult &downloadResult);
     void TMMChanged(int index);
     void categoryChanged(int index);
     void doNotDeleteTorrentClicked(bool checked);
@@ -108,16 +108,18 @@ private:
     void showEvent(QShowEvent *event) override;
 
     Ui::AddNewTorrentDialog *m_ui;
-    TorrentContentFilterModel *m_contentModel;
-    PropListDelegate *m_contentDelegate;
-    bool m_hasMetadata;
+    TorrentContentFilterModel *m_contentModel = nullptr;
+    PropListDelegate *m_contentDelegate = nullptr;
+    bool m_hasMetadata = false;
     BitTorrent::MagnetUri m_magnetURI;
     BitTorrent::TorrentInfo m_torrentInfo;
-    QByteArray m_headerState;
-    int m_oldIndex;
+    int m_oldIndex = 0;
     std::unique_ptr<TorrentFileGuard> m_torrentGuard;
     BitTorrent::AddTorrentParams m_torrentParams;
 
     SettingValue<QSize> m_storeDialogSize;
+    SettingValue<QString> m_storeDefaultCategory;
+    SettingValue<bool> m_storeRememberLastSavePath;
+    SettingValue<QByteArray> m_storeTreeHeaderState;
     SettingValue<QByteArray> m_storeSplitterState;
 };

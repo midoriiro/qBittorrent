@@ -39,7 +39,6 @@ class QCompleter;
 class QContextMenuEvent;
 class QFileSystemModel;
 class QKeyEvent;
-class QStringRef;
 
 namespace Private
 {
@@ -82,10 +81,10 @@ namespace Private
         QString lastTestedPath() const;
 
     private:
-        QValidator::State validate(const QString &path, const QVector<QStringRef> &pathComponents, bool strict,
+        QValidator::State validate(const QList<QStringView> &pathComponents, bool strict,
                                    int firstComponentToTest, int lastComponentToTest) const;
 
-        TestResult testPath(const QStringRef &path, bool pathIsComplete) const;
+        TestResult testPath(QStringView path, bool pathIsComplete) const;
 
         bool m_strictMode;
         bool m_existingOnly;
@@ -112,7 +111,7 @@ namespace Private
     class FileLineEdit final : public QLineEdit, public FileEditorWithCompletion
     {
         Q_OBJECT
-        Q_DISABLE_COPY(FileLineEdit)
+        Q_DISABLE_COPY_MOVE(FileLineEdit)
 
     public:
         FileLineEdit(QWidget *parent = nullptr);

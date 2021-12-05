@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Skip hash check</source>
-        <translation>تخطي التحقق من البيانات</translation>
+        <translation>تخطي التحقق من البيانات (الهاش)</translation>
     </message>
     <message>
         <source>Torrent Management Mode:</source>
@@ -160,10 +160,6 @@
         <translation>يجب أن يكون الحد الزمني للبذر بين 0 و 525600 دقيقة.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>يجب أن يكون المنفذ المستخدم للاتصالات الواردة بين 1 و 65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>يجب أن يكون المنفذ المستخدم لواجهة الوِب الرسومية بين 1 و 65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>المؤلفين الأصليين</translation>
+        <translation type="vanished">المؤلفين الأصليين</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>ملف تعريف الارتباط:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">اكتب المجلد هنا</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>إعادة تسمية تورنت</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">أخرى...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>حسنًا</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>يجب أن يكون المنفذ المستخدم للاتصالات الواردة بين 0 و 65535.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -732,10 +727,6 @@
         <translation>استخدام UPnP / NAT-PMP  لفتح المنافذ تلقائيا</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>استخدم منفذًا مختلفًا عند كل بدء تشغيل</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>حدود الاتصالات</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T: المتتبع الحالي</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: معلومات التحقق من البيانات</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>نصيحة: غلف المعلمات بعلامات اقتباس لتجنب قطع النص عند مسافة بيضاء (على سبيل المثال، "%N")</translation>
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>عنوان الآي بي الذي يتم إعلانه للمتتبع (يتطلب إعادة التشغيل)</translation>
+        <translation type="vanished">عنوان الآي بي الذي يتم إعلانه للمتتبع (يتطلب إعادة التشغيل)</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1457,6 +1444,50 @@
         <source>Type of service (ToS) for connections to peers</source>
         <translation>نوع الخدمة (ToS) للاتصالات مع الأقران</translation>
     </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>الاتصالات الصادرة في الثانية:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>عشوائي</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: تورنت ID</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>إعادة الاتصال بجميع التراكرات عند تغيير IP أو المنفذ:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>قائمة البروكسي الموثوق بهم:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>تفعيل دعم البروكسي العكسي</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: معلومات التحقق من البيانات (الهاش) الإصدار 2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: معلومات التحقق من البيانات (الهاش) الإصدار 1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>PeerListWidget</name>
@@ -1686,10 +1717,6 @@
         <translation>تاريخ الإنشاء:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>بصمة (هاش) التورنت:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>مسار الحفظ:</translation>
     </message>
@@ -1745,6 +1772,22 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (بذرت لـ %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>معلومات التحقق من البيانات (الهاش) الإصدار 2:</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>معلومات التحقق من البيانات (الهاش) الإصدار 1:</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>لا يوجد</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1766,11 +1809,11 @@
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>آخر...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>اكتب المجلد هنا</translation>
     </message>
 </context>
 <context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>عالق (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>يفحص (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>يفحص (0)</translation>
     </message>
 </context>
 <context>
@@ -2295,6 +2346,10 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (بذرت لـ %2)</translation>
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[إجباري] يُنزّل البيانات الوصفية</translation>
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2472,10 +2527,6 @@
         <translation>رابط مغناطيسي</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>بصمة (هاش)</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>إزالة الكل</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>إضافة...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>معلومات التحقق من البيانات (الهاش) الإصدار 1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>معلومات التحقق من البيانات (الهاش) الإصدار 2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>تورنت ID</translation>
     </message>
 </context>
 <context>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>النتائج (تظهر</translation>
+        <translation type="vanished">النتائج (تظهر</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>قم بزيادة عرض النافذة لعرض عوامل تصفية إضافية</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>إلى</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>المؤلف</translation>
+        <translation type="vanished">المؤلف</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>تُستخدم قاعدة بيانات IP to Country Lite المجانية بواسطة DB-IP لفصل بلدان القرناء. قاعدة البيانات مُرخصة بموجب ترخيص Creative Commons Attribution 4.0 International License</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3387,6 +3470,10 @@ Supports the formats: S01E01, 1x1, 2017.12.31 and 31.12.2017 (Date formats also 
     <message>
         <source>RSS feeds</source>
         <translation>تغذيات RSS</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>غير مقروء</translation>
     </message>
 </context>
 </TS>

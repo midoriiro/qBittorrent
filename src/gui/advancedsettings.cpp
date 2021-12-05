@@ -83,6 +83,7 @@ namespace
         NOTIFICATION_TIMEOUT,
 #endif
         CONFIRM_REMOVE_ALL_TAGS,
+        REANNOUNCE_WHEN_ADDRESS_CHANGED,
         DOWNLOAD_TRACKER_FAVICON,
         SAVE_PATH_HISTORY_LENGTH,
         ENABLE_SPEED_WIDGET,
@@ -95,18 +96,18 @@ namespace
         // libtorrent section
         LIBTORRENT_HEADER,
         ASYNC_IO_THREADS,
-#if (LIBTORRENT_VERSION_NUM >= 20000)
+#ifdef QBT_USES_LIBTORRENT2
         HASHING_THREADS,
 #endif
         FILE_POOL_SIZE,
         CHECKING_MEM_USAGE,
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
         // cache
         DISK_CACHE,
         DISK_CACHE_TTL,
 #endif
         OS_CACHE,
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
         COALESCE_RW,
 #endif
         PIECE_EXTENT_AFFINITY,
@@ -115,6 +116,7 @@ namespace
         SEND_BUF_LOW_WATERMARK,
         SEND_BUF_WATERMARK_FACTOR,
         // networking & ports
+        CONNECTION_SPEED,
         SOCKET_BACKLOG_SIZE,
         OUTGOING_PORT_MIN,
         OUTGOING_PORT_MAX,
@@ -124,6 +126,7 @@ namespace
         IDN_SUPPORT,
         MULTI_CONNECTIONS_PER_IP,
         VALIDATE_HTTPS_TRACKER_CERTIFICATE,
+        SSRF_MITIGATION,
         BLOCK_PEERS_ON_PRIVILEGED_PORTS,
         // seeding
         CHOKING_ALGORITHM,
@@ -196,7 +199,7 @@ void AdvancedSettings::saveAdvancedSettings()
 #endif
     // Async IO threads
     session->setAsyncIOThreads(m_spinBoxAsyncIOThreads.value());
-#if (LIBTORRENT_VERSION_NUM >= 20000)
+#ifdef QBT_USES_LIBTORRENT2
     // Hashing threads
     session->setHashingThreads(m_spinBoxHashingThreads.value());
 #endif
@@ -204,14 +207,14 @@ void AdvancedSettings::saveAdvancedSettings()
     session->setFilePoolSize(m_spinBoxFilePoolSize.value());
     // Checking Memory Usage
     session->setCheckingMemUsage(m_spinBoxCheckingMemUsage.value());
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
     // Disk write cache
     session->setDiskCacheSize(m_spinBoxCache.value());
     session->setDiskCacheTTL(m_spinBoxCacheTTL.value());
 #endif
     // Enable OS cache
     session->setUseOSCache(m_checkBoxOsCache.isChecked());
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
     // Coalesce reads & writes
     session->setCoalesceReadWriteEnabled(m_checkBoxCoalesceRW.isChecked());
 #endif
@@ -223,6 +226,8 @@ void AdvancedSettings::saveAdvancedSettings()
     session->setSendBufferWatermark(m_spinBoxSendBufferWatermark.value());
     session->setSendBufferLowWatermark(m_spinBoxSendBufferLowWatermark.value());
     session->setSendBufferWatermarkFactor(m_spinBoxSendBufferWatermarkFactor.value());
+    // Outgoing connections per second
+    session->setConnectionSpeed(m_spinBoxConnectionSpeed.value());
     // Socket listen backlog size
     session->setSocketBacklogSize(m_spinBoxSocketBacklogSize.value());
     // Save resume data interval
@@ -242,6 +247,8 @@ void AdvancedSettings::saveAdvancedSettings()
     session->setMultiConnectionsPerIpEnabled(m_checkBoxMultiConnectionsPerIp.isChecked());
     // Validate HTTPS tracker certificate
     session->setValidateHTTPSTrackerCertificate(m_checkBoxValidateHTTPSTrackerCertificate.isChecked());
+    // SSRF mitigation
+    session->setSSRFMitigationEnabled(m_checkBoxSSRFMitigation.isChecked());
     // Disallow connection to peers on privileged ports
     session->setBlockPeersOnPrivilegedPorts(m_checkBoxBlockPeersOnPrivilegedPorts.isChecked());
     // Recheck torrents on completion
@@ -284,6 +291,8 @@ void AdvancedSettings::saveAdvancedSettings()
 #if (defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)) && defined(QT_DBUS_LIB)
     mainWindow->setNotificationTimeout(m_spinBoxNotificationTimeout.value());
 #endif
+    // Reannounce to all trackers when ip/port changed
+    session->setReannounceWhenAddressChangedEnabled(m_checkBoxReannounceWhenAddressChanged.isChecked());
     // Misc GUI properties
     mainWindow->setDownloadTrackerFavicon(m_checkBoxTrackerFavicon.isChecked());
     AddNewTorrentDialog::setSavePathHistoryLength(m_spinBoxSavePathHistoryLength.value());
@@ -312,7 +321,7 @@ void AdvancedSettings::saveAdvancedSettings()
     session->setPeerTurnoverInterval(m_spinBoxPeerTurnoverInterval.value());
 }
 
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
 void AdvancedSettings::updateCacheSpinSuffix(int value)
 {
     if (value == 0)
@@ -436,7 +445,7 @@ void AdvancedSettings::loadAdvancedSettings()
     addRow(ASYNC_IO_THREADS, (tr("Asynchronous I/O threads") + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#aio_threads", "(?)"))
             , &m_spinBoxAsyncIOThreads);
 
-#if (LIBTORRENT_VERSION_NUM >= 20000)
+#ifdef QBT_USES_LIBTORRENT2
     // Hashing threads
     m_spinBoxHashingThreads.setMinimum(1);
     m_spinBoxHashingThreads.setMaximum(1024);
@@ -465,7 +474,7 @@ void AdvancedSettings::loadAdvancedSettings()
     m_spinBoxCheckingMemUsage.setSuffix(tr(" MiB"));
     addRow(CHECKING_MEM_USAGE, (tr("Outstanding memory when checking torrents") + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#checking_mem_usage", "(?)"))
             , &m_spinBoxCheckingMemUsage);
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
     // Disk write cache
     m_spinBoxCache.setMinimum(-1);
     // When build as 32bit binary, set the maximum at less than 2GB to prevent crashes.
@@ -493,7 +502,7 @@ void AdvancedSettings::loadAdvancedSettings()
     m_checkBoxOsCache.setChecked(session->useOSCache());
     addRow(OS_CACHE, (tr("Enable OS cache") + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#disk_io_write_mode", "(?)"))
             , &m_checkBoxOsCache);
-#if (LIBTORRENT_VERSION_NUM < 20000)
+#ifndef QBT_USES_LIBTORRENT2
     // Coalesce reads & writes
     m_checkBoxCoalesceRW.setChecked(session->isCoalesceReadWriteEnabled());
     addRow(COALESCE_RW, (tr("Coalesce reads & writes") + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#coalesce_reads", "(?)"))
@@ -525,6 +534,12 @@ void AdvancedSettings::loadAdvancedSettings()
     m_spinBoxSendBufferWatermarkFactor.setValue(session->sendBufferWatermarkFactor());
     addRow(SEND_BUF_WATERMARK_FACTOR, (tr("Send buffer watermark factor") + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#send_buffer_watermark_factor", "(?)"))
             , &m_spinBoxSendBufferWatermarkFactor);
+    // Outgoing connections per second
+    m_spinBoxConnectionSpeed.setMinimum(0);
+    m_spinBoxConnectionSpeed.setMaximum(std::numeric_limits<int>::max());
+    m_spinBoxConnectionSpeed.setValue(session->connectionSpeed());
+    addRow(CONNECTION_SPEED, (tr("Outgoing connections per second") + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#connection_speed", "(?)"))
+            , &m_spinBoxConnectionSpeed);
     // Socket listen backlog size
     m_spinBoxSocketBacklogSize.setMinimum(1);
     m_spinBoxSocketBacklogSize.setMaximum(std::numeric_limits<int>::max());
@@ -587,6 +602,11 @@ void AdvancedSettings::loadAdvancedSettings()
     addRow(VALIDATE_HTTPS_TRACKER_CERTIFICATE, (tr("Validate HTTPS tracker certificates")
             + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#validate_https_trackers", "(?)"))
             , &m_checkBoxValidateHTTPSTrackerCertificate);
+    // SSRF mitigation
+    m_checkBoxSSRFMitigation.setChecked(session->isSSRFMitigationEnabled());
+    addRow(SSRF_MITIGATION, (tr("Server-side request forgery (SSRF) mitigation")
+        + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#ssrf_mitigation", "(?)"))
+        , &m_checkBoxSSRFMitigation);
     // Disallow connection to peers on privileged ports
     m_checkBoxBlockPeersOnPrivilegedPorts.setChecked(session->blockPeersOnPrivilegedPorts());
     addRow(BLOCK_PEERS_ON_PRIVILEGED_PORTS, (tr("Disallow connection to peers on privileged ports") + ' ' + makeLink("https://libtorrent.org/single-page-ref.html#no_connect_privileged_ports", "(?)")), &m_checkBoxBlockPeersOnPrivilegedPorts);
@@ -634,7 +654,7 @@ void AdvancedSettings::loadAdvancedSettings()
     addRow(NETWORK_IFACE_ADDRESS, tr("Optional IP address to bind to"), &m_comboBoxInterfaceAddress);
     // Announce IP
     m_lineEditAnnounceIP.setText(session->announceIP());
-    addRow(ANNOUNCE_IP, (tr("IP Address to report to trackers (requires restart)")
+    addRow(ANNOUNCE_IP, (tr("IP address reported to trackers (requires restart)")
         + ' ' + makeLink("https://www.libtorrent.org/reference-Settings.html#announce_ip", "(?)"))
         , &m_lineEditAnnounceIP);
     // Max concurrent HTTP announces
@@ -664,6 +684,9 @@ void AdvancedSettings::loadAdvancedSettings()
     m_spinBoxNotificationTimeout.setSuffix(tr(" ms", " milliseconds"));
     addRow(NOTIFICATION_TIMEOUT, tr("Notification timeout [0: infinite]"), &m_spinBoxNotificationTimeout);
 #endif
+    // Reannounce to all trackers when ip/port changed
+    m_checkBoxReannounceWhenAddressChanged.setChecked(session->isReannounceWhenAddressChangedEnabled());
+    addRow(REANNOUNCE_WHEN_ADDRESS_CHANGED, tr("Reannounce to all trackers when IP or port changed"), &m_checkBoxReannounceWhenAddressChanged);
     // Download tracker's favicon
     m_checkBoxTrackerFavicon.setChecked(mainWindow->isDownloadTrackerFavicon());
     addRow(DOWNLOAD_TRACKER_FAVICON, tr("Download tracker's favicon"), &m_checkBoxTrackerFavicon);

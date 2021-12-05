@@ -160,10 +160,6 @@
         <translation>Il limite temporale di condivisione deve essere tra 0 e 525600 minuti.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>La porta usata per le connessioni in entrata deve essere compresa tra 1 e 65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>La porta usata per l'interfaccia web deve essere compresa tra 1 e 65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Autori originari</translation>
+        <translation type="vanished">Autori originari</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Cookie:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Inserisci cartella</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Rinomina torrent</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Altro...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -376,6 +363,14 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>La porta usata per le connessioni in entrata deve essere compresa tra 0 e 65535.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -733,10 +728,6 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <translation>Usa UPnP / NAT-PMP per aprire le porte del mio router</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Usa porte diverse ad ogni avvio</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Limiti Connessioni</translation>
     </message>
@@ -971,10 +962,6 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <translation>%T: Server traccia attuale</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: Info hash</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Suggerimento: Incapsula i parametri con i segni di quotazione per evitare tagli del testo negli spazi bianchi (per esempio "%N")</translation>
     </message>
@@ -1204,7 +1191,7 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>Indirizzo IP da segnalare ai tracker (richiede il riavvio):</translation>
+        <translation type="vanished">Indirizzo IP da segnalare ai tracker (richiede il riavvio):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1458,6 +1445,50 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Tipo di servizio (ToS) per le connessioni ai peer</translation>
     </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Connessioni in uscita per secondo:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Casuale</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: ID torrent</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>Riannuncia a tutti i tracker quando l'IP o la porta sono cambiati:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Elenco proxy affidabili:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Abilita supporto proxy inverso</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: Info hash v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%J: Info hash v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>PeerListWidget</name>
@@ -1687,10 +1718,6 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <translation>Creato il:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Hash torrent:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Percorso salvataggio:</translation>
     </message>
@@ -1746,6 +1773,22 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <source>%1 (seeded for %2)</source>
         <translation>%1 (condiviso per %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Info hash v2</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Info hash v1</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/D</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1767,11 +1810,11 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Altro...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Digita qui la cartella</translation>
     </message>
 </context>
 <context>
@@ -1953,6 +1996,14 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     <message>
         <source>Stalled (%1)</source>
         <translation>In stallo (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>Verifica (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>Verifica (0)</translation>
     </message>
 </context>
 <context>
@@ -2296,6 +2347,10 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <source>%1 (seeded for %2)</source>
         <translation>%1 (condiviso per %2)</translation>
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[F] Download metadati</translation>
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2473,10 +2528,6 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <translation>Collegamento magnet</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Hash</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Rimuovi tutto</translation>
     </message>
@@ -2495,6 +2546,18 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     <message>
         <source>Add...</source>
         <translation>Aggiugi...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>Info hash v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>Info hash v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>ID torrent</translation>
     </message>
 </context>
 <context>
@@ -2695,7 +2758,7 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Risultati (visualizzano</translation>
+        <translation type="vanished">Risultati (visualizzano</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2724,6 +2787,18 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Aumenta la larghezza della finestra per visualizzare filtri aggiuntivi</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>in</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2952,7 +3027,7 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation>Autore</translation>
+        <translation type="vanished">Autore</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2962,6 +3037,14 @@ Assicurati che corrispondano allo standard IP:porta.</translation>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>Il database gratuito da IP a Country Lite di DB-IP viene usato per risolvere i paesi dei peer. 
 Il database è concesso in licenza con la licenza internazionale Creative Commons Attribution 4.0</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3391,6 +3474,10 @@ Supporta i formati: S01E01, 1x1, 2017.12.31 e 31.12.2017 (I formati a data suppo
     <message>
         <source>RSS feeds</source>
         <translation>Feed RSS</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>Non letto</translation>
     </message>
 </context>
 </TS>

@@ -39,6 +39,7 @@
 #include <QDebug>
 #include <QEvent>
 #include <QMessageBox>
+#include <QMenu>
 #include <QMouseEvent>
 #include <QObject>
 #include <QRegularExpression>
@@ -160,6 +161,15 @@ bool SearchWidget::eventFilter(QObject *object, QEvent *event)
         if ((mouseEvent->button() == Qt::MiddleButton) && (tabIndex >= 0))
         {
             closeTab(tabIndex);
+            return true;
+        }
+        if (mouseEvent->button() == Qt::RightButton)
+        {
+            QMenu *menu = new QMenu(this);
+            menu->setAttribute(Qt::WA_DeleteOnClose);
+            menu->addAction(tr("Close tab"), this, [this, tabIndex]() { closeTab(tabIndex); });
+            menu->addAction(tr("Close all tabs"), this, &SearchWidget::closeAllTabs);
+            menu->popup(QCursor::pos());
             return true;
         }
         return false;
@@ -294,7 +304,7 @@ void SearchWidget::on_searchButton_clicked()
 {
     if (!Utils::ForeignApps::pythonInfo().isValid())
     {
-        m_mainWindow->showNotificationBaloon(tr("Search Engine"), tr("Please install Python to use the Search Engine."));
+        m_mainWindow->showNotificationBalloon(tr("Search Engine"), tr("Please install Python to use the Search Engine."));
         return;
     }
 
@@ -363,9 +373,9 @@ void SearchWidget::tabStatusChanged(QWidget *tab)
         if (m_mainWindow->isNotificationsEnabled() && (m_mainWindow->currentTabWidget() != this))
         {
             if (m_activeSearchTab->status() == SearchJobWidget::Status::Error)
-                m_mainWindow->showNotificationBaloon(tr("Search Engine"), tr("Search has failed"));
+                m_mainWindow->showNotificationBalloon(tr("Search Engine"), tr("Search has failed"));
             else
-                m_mainWindow->showNotificationBaloon(tr("Search Engine"), tr("Search has finished"));
+                m_mainWindow->showNotificationBalloon(tr("Search Engine"), tr("Search has finished"));
         }
 
         m_activeSearchTab = nullptr;
@@ -380,4 +390,10 @@ void SearchWidget::closeTab(int index)
         m_ui->searchButton->setText(tr("Search"));
 
     delete tab;
+}
+
+void SearchWidget::closeAllTabs()
+{
+    for (int i = (m_allTabs.size() - 1); i >= 0; --i)
+        closeTab(i);
 }

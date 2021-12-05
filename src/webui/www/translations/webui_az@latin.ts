@@ -160,10 +160,6 @@
         <translation>Göndərmə vaxtı limiti 0 ilə 525600 dəqiqələri arasında olmalıdır.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>Daxil olan bağlantıların istifadə etdiyi port 1 ilə 65535 arasında olmalıdır.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>Veb İİ üçün istifadə olunan port 1 İlə 65535 arasında olmalıdır</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Orijinal müəlliflər</translation>
+        <translation type="vanished">Orijinal müəlliflər</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Kukilər:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Qovluğu buraya yazın</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Torrentin adını dəyişmək</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Digər...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -375,6 +362,14 @@
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>Daxil olan bağlantıla üçün istifadə olunan port 0 ilə 65535 arasında olmalıdır.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -732,10 +727,6 @@
         <translation>UPnP / NAT-PMP portunun yönləndirməsi üçün routerimdən istifadə etmək</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Hər dəfə başladıldığında müxtəlif portdan istifadə etmək</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Bağlantı limitləri</translation>
     </message>
@@ -970,10 +961,6 @@
         <translation>%T: Cari izləyici</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: Məlumat ünvanlaması</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Növ: Mətni, ara boşluğunda kəsilmələrndən qorumaq üçün parametrləri dırnaq işarəsinə alın (məs., "%N")</translation>
     </message>
@@ -1203,7 +1190,7 @@
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>İzləyicilərə məlumat üçün İP ünvanı (yenidən başladılmalı):</translation>
+        <translation type="vanished">İzləyicilərə məlumat üçün İP ünvanı (yenidən başladılmalı):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1457,6 +1444,50 @@
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Iştirakçılarla bağlantı üçün xidmət növü (ToS)</translation>
     </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Hər saniyədə sərf olunan bağlantı:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Təsadüfi</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: Torrent İD-si</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>İP və ya port dəyişdirildiyində bütün izləyicilərə bildirmək:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Etibarlı proksilər siyahısı:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Əks proksi dəstəklənməsini açın</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: Məlumat heş'i v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: Məlumat heş'i v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>PeerListWidget</name>
@@ -1686,10 +1717,6 @@
         <translation>Yaradılıb:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Torrent ünvanlanması:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Saxlama yolu:</translation>
     </message>
@@ -1745,6 +1772,22 @@
         <source>%1 (seeded for %2)</source>
         <translation>%1 (%2 üçün göndərilmə)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Məlumat heş'i v2:</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Məlumat heş'i v1</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>Əlçatmaz</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1766,11 +1809,11 @@
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Digər...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Qovluğu burada göstərin</translation>
     </message>
 </context>
 <context>
@@ -1952,6 +1995,14 @@
     <message>
         <source>Stalled (%1)</source>
         <translation>Dayandırılan (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>Yoxlanılır (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>Yoxlanılır (0)</translation>
     </message>
 </context>
 <context>
@@ -2150,7 +2201,7 @@
     </message>
     <message>
         <source>N/A</source>
-        <translation>M/D</translation>
+        <translation>Əlçatmaz</translation>
     </message>
     <message>
         <source>Seeds</source>
@@ -2294,6 +2345,10 @@
     <message>
         <source>%1 (seeded for %2)</source>
         <translation>%1 (%2 üçün göndərilmə)</translation>
+    </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[F] Meta verilənləri endirilir</translation>
     </message>
 </context>
 <context>
@@ -2472,10 +2527,6 @@
         <translation>Maqnit keçidi</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Heş</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Hamısını silmək</translation>
     </message>
@@ -2494,6 +2545,18 @@
     <message>
         <source>Add...</source>
         <translation>Əlavə etmək...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>məlumat heş'i v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>məlumat heş'i v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>Torrent İD-si</translation>
     </message>
 </context>
 <context>
@@ -2694,7 +2757,7 @@
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Nəticələr (göstərən</translation>
+        <translation type="vanished">Nəticələr (göstərən</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2723,6 +2786,18 @@
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Əlavə filtrləri göstərmək üçün pəncərəni eninə böyüdün</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>buraya</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2951,7 +3026,7 @@
     </message>
     <message>
         <source>Author</source>
-        <translation>Müəllif</translation>
+        <translation type="vanished">Müəllif</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2960,6 +3035,14 @@
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>DB-IP tərəfindən pulsuz verilən ’İP to Country Lite’ verilənlər bazası iştirakçılarının ölkələrinin müəyən olunması üçün istifadə olunur. Verilənlər bazası Creative Commons Attribution 4.0 Beynəlxalq Lisenziyası altında lisenziyalanıb.</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3387,6 +3470,10 @@ Bu formatlar dəstəklənir: S01E01, 1x1, 2017.12.31 və 31.12.2017 (Həmçinin 
     <message>
         <source>RSS feeds</source>
         <translation>RSS lentləri</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>Oxunmamış</translation>
     </message>
 </context>
 </TS>

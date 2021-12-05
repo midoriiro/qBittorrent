@@ -47,7 +47,6 @@ add_library(qbt_gui STATIC
     rss/feedlistwidget.h
     rss/htmlbrowser.h
     rss/rsswidget.h
-    scanfoldersdelegate.h
     search/pluginselectdialog.h
     search/pluginsourcedialog.h
     search/searchjobwidget.h
@@ -79,6 +78,8 @@ add_library(qbt_gui STATIC
     tristatewidget.h
     uithememanager.h
     utils.h
+    watchedfolderoptionsdialog.h
+    watchedfoldersmodel.h
 
     # sources
     aboutdialog.cpp
@@ -128,7 +129,6 @@ add_library(qbt_gui STATIC
     rss/feedlistwidget.cpp
     rss/htmlbrowser.cpp
     rss/rsswidget.cpp
-    scanfoldersdelegate.cpp
     search/pluginselectdialog.cpp
     search/pluginsourcedialog.cpp
     search/searchjobwidget.cpp
@@ -160,6 +160,8 @@ add_library(qbt_gui STATIC
     tristatewidget.cpp
     uithememanager.cpp
     utils.cpp
+    watchedfolderoptionsdialog.cpp
+    watchedfoldersmodel.cpp
 
     # forms
     aboutdialog.ui
@@ -190,6 +192,7 @@ add_library(qbt_gui STATIC
     torrentcreatordialog.ui
     torrentoptionsdialog.ui
     trackerentriesdialog.ui
+    watchedfolderoptionsdialog.ui
 )
 
 target_sources(qbt_gui INTERFACE about.qrc)
@@ -198,7 +201,7 @@ target_link_libraries(qbt_gui
     PRIVATE
         qbt_base
     PUBLIC
-        Qt5::Gui Qt5::Widgets
+        Qt::Gui Qt::Widgets
 )
 
 if (DBUS)
@@ -218,10 +221,10 @@ if ((CMAKE_SYSTEM_NAME STREQUAL "Windows") OR (CMAKE_SYSTEM_NAME STREQUAL "Darwi
 endif()
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    target_link_libraries(qbt_gui PRIVATE
-        Qt5::WinExtras
-        PowrProf
-    )
+    target_link_libraries(qbt_gui PRIVATE PowrProf)
+    if (NOT QT6)
+        target_link_libraries(qbt_gui PRIVATE Qt5::WinExtras)
+    endif()
 endif()
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
@@ -229,7 +232,5 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
         macutilities.h
         macutilities.mm
     )
-    target_link_libraries(qbt_gui PRIVATE
-        objc
-    )
+    target_link_libraries(qbt_gui PRIVATE objc)
 endif()

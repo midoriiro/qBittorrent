@@ -160,10 +160,6 @@
         <translation>El límit de la sembra ha de ser entre 0 i 525600 minuts.</translation>
     </message>
     <message>
-        <source>The port used for incoming connections must be between 1 and 65535.</source>
-        <translation>El port utilitzat per a connexions entrants ha de ser major de 1024 i menor de 65535.</translation>
-    </message>
-    <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
         <translation>El port utilitzat per a la interfície d'usuari web ha de ser major de 1024 i menor de 65535.</translation>
     </message>
@@ -189,7 +185,7 @@
     </message>
     <message>
         <source>Original authors</source>
-        <translation>Autors originals</translation>
+        <translation type="vanished">Autors originals</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -211,10 +207,6 @@
     <message>
         <source>Cookie:</source>
         <translation>Cookie:</translation>
-    </message>
-    <message>
-        <source>Type folder here</source>
-        <translation type="vanished">Escriviu la carpeta aquí</translation>
     </message>
     <message>
         <source>More information</source>
@@ -239,11 +231,6 @@
     <message>
         <source>Rename torrent</source>
         <translation>Canvia de nom el torrent</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <comment>Save Files to: Watch Folder / Default Folder / Other...</comment>
-        <translation type="vanished">Altres ...</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -376,6 +363,14 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     <message>
         <source>OK</source>
         <translation>D'acord</translation>
+    </message>
+    <message>
+        <source>The port used for incoming connections must be between 0 and 65535.</source>
+        <translation>El port utilitzat per a connexions entrants ha de ser entre 0 i 65535.</translation>
+    </message>
+    <message>
+        <source>Original author</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -733,10 +728,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Utilitza UPnP / NAT-PMP reenviament de ports del router</translation>
     </message>
     <message>
-        <source>Use different port on each startup</source>
-        <translation>Usa un pot diferent a cada inici</translation>
-    </message>
-    <message>
         <source>Connections Limits</source>
         <translation>Límits de connexió</translation>
     </message>
@@ -971,10 +962,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>%T: rastrejador actual</translation>
     </message>
     <message>
-        <source>%I: Info hash</source>
-        <translation>%I: informació del resum</translation>
-    </message>
-    <message>
         <source>Tip: Encapsulate parameter with quotation marks to avoid text being cut off at whitespace (e.g., "%N")</source>
         <translation>Tip: emmarqueu el paràmetre amb cometes per evitar que el text es talli a l'espai en blanc (p.e., "%N")</translation>
     </message>
@@ -1204,7 +1191,7 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>IP Address to report to trackers (requires restart):</source>
-        <translation>Adreça IP per notificar als rastrejadors (requereix reinici):</translation>
+        <translation type="vanished">Adreça IP per notificar als rastrejadors (requereix reinici):</translation>
     </message>
     <message>
         <source>Recheck torrents on completion:</source>
@@ -1458,6 +1445,50 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <source>Type of service (ToS) for connections to peers</source>
         <translation>Tipus de servei (ToS) per a connexions amb clients</translation>
     </message>
+    <message>
+        <source>Outgoing connections per second:</source>
+        <translation>Connexions de sortida per segon:</translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>Aleatori</translation>
+    </message>
+    <message>
+        <source>%K: Torrent ID</source>
+        <translation>%K: ID del torrent</translation>
+    </message>
+    <message>
+        <source>Reannounce to all trackers when IP or port changed:</source>
+        <translation>Torna a anunciar-ho a tots els rastrejadors quan es canviï d’IP o de port:</translation>
+    </message>
+    <message>
+        <source>Trusted proxies list:</source>
+        <translation>Llista d'intermediaris de confiança:</translation>
+    </message>
+    <message>
+        <source>Enable reverse proxy support</source>
+        <translation>Habilita la compatibilitat amb el servidor intermediari invers</translation>
+    </message>
+    <message>
+        <source>%J: Info hash v2</source>
+        <translation>%J: informació del resum v2</translation>
+    </message>
+    <message>
+        <source>%I: Info hash v1</source>
+        <translation>%I: informació del resum v1</translation>
+    </message>
+    <message>
+        <source>IP address reported to trackers (requires restart):</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Set to 0 to let your system pick an unused port</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Server-side request forgery (SSRF) mitigation:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>PeerListWidget</name>
@@ -1687,10 +1718,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Creat el:</translation>
     </message>
     <message>
-        <source>Torrent Hash:</source>
-        <translation>Resum del torrent:</translation>
-    </message>
-    <message>
         <source>Save Path:</source>
         <translation>Camí per desar:</translation>
     </message>
@@ -1746,6 +1773,22 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <source>%1 (seeded for %2)</source>
         <translation>%1 (sembrat durant %2)</translation>
     </message>
+    <message>
+        <source>Info Hash v2:</source>
+        <translation>Informació de la funció resum v2:</translation>
+    </message>
+    <message>
+        <source>Info Hash v1:</source>
+        <translation>Informació de la funció resum v1:</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N / D</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished" />
+    </message>
 </context>
 <context>
     <name>ScanFoldersModel</name>
@@ -1767,11 +1810,11 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished" />
+        <translation>Una altra...</translation>
     </message>
     <message>
         <source>Type folder here</source>
-        <translation type="unfinished" />
+        <translation>Escriviu aquí la carpeta</translation>
     </message>
 </context>
 <context>
@@ -1953,6 +1996,14 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     <message>
         <source>Stalled (%1)</source>
         <translation>Interromputs (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (%1)</source>
+        <translation>Comprovant (%1)</translation>
+    </message>
+    <message>
+        <source>Checking (0)</source>
+        <translation>Comprovant (0)</translation>
     </message>
 </context>
 <context>
@@ -2296,6 +2347,10 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <source>%1 (seeded for %2)</source>
         <translation>%1 (sembrat durant %2)</translation>
     </message>
+    <message>
+        <source>[F] Downloading metadata</source>
+        <translation>[F] Baixant metadades</translation>
+    </message>
 </context>
 <context>
     <name>TransferListFiltersWidget</name>
@@ -2473,10 +2528,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Enllaç magnètic</translation>
     </message>
     <message>
-        <source>Hash</source>
-        <translation>Resum</translation>
-    </message>
-    <message>
         <source>Remove All</source>
         <translation>Suprimeix-les totes</translation>
     </message>
@@ -2495,6 +2546,18 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     <message>
         <source>Add...</source>
         <translation>Afegeix...</translation>
+    </message>
+    <message>
+        <source>Info hash v1</source>
+        <translation>Informació de la funció resum v1</translation>
+    </message>
+    <message>
+        <source>Info hash v2</source>
+        <translation>Informació de la funció resum v2</translation>
+    </message>
+    <message>
+        <source>Torrent ID</source>
+        <translation>ID del torrent</translation>
     </message>
 </context>
 <context>
@@ -2695,7 +2758,7 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Results (showing</source>
-        <translation>Resultats</translation>
+        <translation type="vanished">Resultats</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -2724,6 +2787,18 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     <message>
         <source>Increase window width to display additional filters</source>
         <translation>Augmenta l'amplada de la finestra per mostrar els filtres addicionals</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>a</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>showing</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -2952,7 +3027,7 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation>Autor</translation>
+        <translation type="vanished">Autor</translation>
     </message>
     <message>
         <source>Software Used</source>
@@ -2961,6 +3036,14 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     <message>
         <source>The free IP to Country Lite database by DB-IP is used for resolving the countries of peers. The database is licensed under the Creative Commons Attribution 4.0 International License</source>
         <translation>La IP lliure per a Country Lite de DB-IP s’usa per resoldre els països dels clients. La base de dades té llicència internacional de Creative Commons Attribution 4.0.</translation>
+    </message>
+    <message>
+        <source>Authors</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -3388,6 +3471,10 @@ Admet els formats S01E01, 1x1, 2017.12.31 i 31.12.2017 (Els formats de data tamb
     <message>
         <source>RSS feeds</source>
         <translation>Canals d'RSS</translation>
+    </message>
+    <message>
+        <source>Unread</source>
+        <translation>No llegit</translation>
     </message>
 </context>
 </TS>
